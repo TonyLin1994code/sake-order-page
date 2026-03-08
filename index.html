@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>蘭爵私選 × LINKet｜活動選購</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+TC:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{
+  --ink:#0d0d0d;--ink2:#1a1a1a;
+  --border:#e8e4de;--border2:#f0ede8;
+  --paper:#faf9f6;--paper2:#f5f3ef;--cream:#ede8df;
+  --gold:#b8975a;--gold2:#c9a96e;
+  --gold-dim:rgba(184,151,90,.15);--gold-border:rgba(184,151,90,.3);
+  --accent:#253586;--accent2:#3d52c4;
+  --red:#8b2020;
+  --text:#1a1a1a;--text2:#5a5550;--text3:#8a867f;
+  --success:#2d6a4f;
+  --r:4px;
+  --shadow:0 2px 16px rgba(0,0,0,.06);
+  --shadow2:0 8px 32px rgba(0,0,0,.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{background:var(--paper);color:var(--text);font-family:'Noto Sans TC',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden;}
+input,textarea,select{font-family:'Noto Sans TC',sans-serif;font-size:.88rem;}
+button{cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
+img{display:block;}
+
+.page-wrap{max-width:480px;margin:0 auto;min-height:100vh;background:var(--paper);position:relative;}
+
+/* HEADER */
+.site-header{background:var(--ink);padding:1rem 1.2rem .85rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.header-logos{display:flex;align-items:center;gap:.7rem;}
+.header-logos img{height:17px;filter:brightness(0) invert(1);opacity:.9;}
+.header-sep{width:1px;height:14px;background:rgba(255,255,255,.2);}
+.header-title{font-family:'Syne',sans-serif;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.cart-btn{position:relative;background:var(--gold);border:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background .2s;}
+.cart-btn:hover{background:var(--gold2);}
+.cart-badge{position:absolute;top:-3px;right:-3px;background:var(--red);color:#fff;font-size:.55rem;font-weight:700;width:16px;height:16px;border-radius:50%;display:none;align-items:center;justify-content:center;}
+.cart-badge.show{display:flex;}
+
+/* STEPS */
+.steps{background:var(--paper2);border-bottom:1px solid var(--border2);padding:.7rem 1.2rem;display:flex;align-items:center;justify-content:center;}
+.step-item{display:flex;align-items:center;gap:.3rem;font-family:'Syne',sans-serif;font-size:.58rem;letter-spacing:.1em;color:var(--text3);transition:color .3s;}
+.step-item.active{color:var(--gold);}
+.step-item.done{color:var(--text2);}
+.step-dot{width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0;}
+.step-item.active .step-dot{background:var(--gold);border-color:var(--gold);color:#fff;}
+.step-item.done .step-dot{background:var(--ink);border-color:var(--ink);color:#fff;}
+.step-connector{width:24px;height:1px;background:var(--border);margin:0 .4rem;flex-shrink:0;}
+
+/* SECTION HEAD */
+.section-head{padding:1.4rem 1.2rem .6rem;border-bottom:1px solid var(--border2);}
+.section-head h2{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;letter-spacing:.04em;color:var(--ink);margin-bottom:.1rem;}
+.section-head p{font-size:.75rem;color:var(--text3);letter-spacing:.04em;}
+
+/* CAT TABS */
+.cat-tabs{display:flex;border-bottom:1px solid var(--border);padding:0 1.2rem;background:var(--paper);gap:.5rem;}
+.cat-tab{font-family:'Noto Sans TC',sans-serif;font-size:.88rem;font-weight:500;padding:1rem 1.2rem;color:var(--text3);background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s;white-space:nowrap;flex:1;text-align:center;}
+.cat-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.cat-tab:hover{color:var(--text);}
+
+/* PRODUCT CARDS */
+.products-list{padding:.8rem 1.2rem;display:flex;flex-direction:column;gap:.8rem;}
+.prod-card{background:#fff;border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:box-shadow .2s,border-color .2s;}
+.prod-card:hover{box-shadow:var(--shadow2);border-color:var(--border);}
+.prod-card.in-cart{border-color:var(--gold-border);background:rgba(184,151,90,.05);}
+.prod-inner{display:flex;align-items:stretch;}
+.prod-img-wrap{width:90px;height:120px;flex-shrink:0;background:var(--paper2);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.prod-img-wrap img{width:100%;height:100%;object-fit:contain;padding:6px;}
+.prod-img-placeholder{font-size:2rem;}
+.prod-body{flex:1;padding:.85rem .9rem .85rem .75rem;display:flex;flex-direction:column;gap:.2rem;}
+.prod-meta{display:flex;align-items:center;gap:.4rem;margin-bottom:.15rem;}
+.prod-origin{font-family:'Syne',sans-serif;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);}
+.prod-type-dot{width:3px;height:3px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.prod-type{font-size:.52rem;letter-spacing:.08em;color:var(--gold);}
+.prod-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;color:var(--ink);line-height:1.2;}
+.prod-name-en{font-family:'Cormorant Garamond',serif;font-size:.72rem;font-style:italic;color:var(--text3);letter-spacing:.06em;}
+.prod-flavor{font-size:.72rem;color:var(--text2);line-height:1.5;margin-top:.2rem;letter-spacing:.02em;}
+.prod-tags{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.3rem;}
+.prod-tag{font-size:.55rem;letter-spacing:.08em;padding:.15rem .45rem;border:1px solid var(--border);color:var(--text3);border-radius:2px;}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;padding:.6rem .9rem .7rem .75rem;border-top:1px solid var(--border2);background:rgba(250,249,246,.5);}
+.prod-price{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;color:var(--ink);letter-spacing:.02em;}
+.prod-price span{font-size:.7rem;font-weight:300;color:var(--text3);margin-right:.15rem;}
+.prod-link{font-size:.6rem;letter-spacing:.1em;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:.25rem;border-bottom:1px solid rgba(37,53,134,.2);padding-bottom:1px;transition:color .2s;}
+.prod-link:hover{color:var(--accent2);}
+
+/* QTY */
+.qty-control{display:flex;align-items:center;}
+.qty-btn{width:28px;height:28px;background:var(--paper2);border:1px solid var(--border);color:var(--ink);font-size:1rem;font-weight:500;display:flex;align-items:center;justify-content:center;transition:background .15s;border-radius:var(--r);-webkit-user-select:none;user-select:none;}
+.qty-btn:hover{background:var(--cream);border-color:var(--gold-border);}
+.qty-num{width:32px;text-align:center;font-family:'Syne',sans-serif;font-size:.82rem;font-weight:600;color:var(--ink);border-top:1px solid var(--border);border-bottom:1px solid var(--border);height:28px;display:flex;align-items:center;justify-content:center;background:#fff;}
+
+/* PLAN CARDS */
+.plans-list{padding:.8rem 1.2rem;display:flex;flex-direction:column;gap:.8rem;}
+.plan-card{background:#fff;border:1.5px solid var(--border2);border-radius:var(--r);padding:1rem 1rem;transition:border-color .2s;}
+.plan-card.in-cart{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,53,134,.08);}
+.plan-badge{display:inline-block;font-family:'Syne',sans-serif;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .55rem;margin-bottom:.5rem;}
+.plan-badge.light{background:rgba(184,151,90,.15);color:var(--gold);border:1px solid rgba(184,151,90,.3);}
+.plan-badge.plus{background:var(--accent);color:#fff;}
+.plan-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--ink);margin-bottom:.2rem;}
+.plan-price-row{display:flex;align-items:baseline;gap:.4rem;margin-bottom:.3rem;}
+.plan-price-big{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--ink);}
+.plan-price-unit{font-size:.7rem;color:var(--text3);}
+.plan-note{font-size:.68rem;color:var(--text3);letter-spacing:.02em;margin-bottom:.5rem;}
+.plan-features{display:flex;flex-direction:column;gap:.2rem;margin-bottom:.8rem;}
+.plan-feat{font-size:.72rem;color:var(--text2);display:flex;align-items:flex-start;gap:.4rem;}
+.plan-feat::before{content:'✦';color:var(--accent);font-size:.55rem;flex-shrink:0;margin-top:.12rem;}
+.plan-footer{display:flex;align-items:center;justify-content:space-between;padding-top:.7rem;border-top:1px solid var(--border2);}
+
+/* CART BAR */
+.cart-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--ink);padding:.9rem 1.2rem;display:none;align-items:center;justify-content:space-between;z-index:150;border-top:1px solid rgba(255,255,255,.1);}
+.cart-bar.show{display:flex;}
+.cart-bar-info{color:#fff;}
+.cart-bar-count{font-size:.65rem;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:.1rem;}
+.cart-bar-total{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;}
+.cart-bar-total span{font-size:.75rem;font-weight:300;color:rgba(255,255,255,.5);margin-right:.15rem;}
+.cart-proceed-btn{background:var(--gold);color:var(--ink);border:none;padding:.65rem 1.4rem;font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border-radius:var(--r);transition:background .2s;white-space:nowrap;}
+.cart-proceed-btn:hover{background:var(--gold2);}
+
+/* CART STEP */
+.cart-items{padding:.8rem 1.2rem;display:flex;flex-direction:column;gap:.6rem;}
+.cart-item{background:#fff;border:1px solid var(--border2);border-radius:var(--r);padding:.75rem .9rem;display:flex;align-items:center;gap:.8rem;}
+.cart-item-img{width:42px;height:52px;border-radius:2px;background:var(--paper2);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.cart-item-img img{width:100%;height:100%;object-fit:contain;padding:3px;}
+.cart-item-img-placeholder{font-size:1.2rem;}
+.cart-item-info{flex:1;min-width:0;}
+.cart-item-name{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--ink);margin-bottom:.08rem;}
+.cart-item-sub{font-size:.65rem;color:var(--text3);letter-spacing:.04em;}
+.cart-item-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;flex-shrink:0;}
+.cart-item-price{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:500;}
+.cart-item-remove{font-size:.6rem;color:var(--text3);background:none;border:none;text-decoration:underline;transition:color .2s;}
+.cart-item-remove:hover{color:var(--red);}
+.cart-summary{margin:0 1.2rem;border-top:1px solid var(--border);padding-top:.8rem;}
+.cart-row{display:flex;justify-content:space-between;font-size:.8rem;padding:.3rem 0;color:var(--text2);}
+.cart-row.total{border-top:1px solid var(--border);margin-top:.4rem;padding-top:.7rem;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--ink);}
+.cart-row.total span{font-size:.75rem;font-weight:300;color:var(--text3);margin-right:.2rem;}
+.cart-empty{text-align:center;padding:3rem 1.2rem;color:var(--text3);font-size:.85rem;line-height:2;}
+.cart-empty-icon{font-size:2rem;margin-bottom:.8rem;}
+
+/* FORM */
+.form-section{padding:.8rem 1.2rem;display:flex;flex-direction:column;gap:1rem;}
+.form-group{display:flex;flex-direction:column;gap:.35rem;}
+.form-label{font-family:'Syne',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text2);}
+.form-label .req{color:var(--red);margin-left:.2rem;}
+.form-input,.form-textarea{width:100%;border:1px solid var(--border);border-radius:var(--r);padding:.65rem .8rem;font-size:.88rem;color:var(--text);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;}
+.form-input:focus,.form-textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,151,90,.15);}
+.form-input.error{border-color:var(--red);}
+.form-textarea{resize:vertical;min-height:72px;line-height:1.6;}
+.form-hint{font-size:.65rem;color:var(--text3);letter-spacing:.02em;line-height:1.5;}
+.form-divider{height:1px;background:var(--border2);margin:.4rem 0;}
+.form-section-label{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--ink);display:flex;align-items:center;gap:.6rem;}
+.form-section-label::before{content:'';width:3px;height:16px;background:var(--gold);flex-shrink:0;}
+.error-msg{font-size:.7rem;color:var(--red);margin-top:.2rem;display:none;}
+.error-msg.show{display:block;}
+.linket-fields{background:rgba(37,53,134,.04);border:1px solid rgba(37,53,134,.12);border-radius:var(--r);padding:.9rem;display:flex;flex-direction:column;gap:1rem;}
+.linket-fields-title{font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.4rem;}
+.linket-fields-title::before{content:'';width:16px;height:1px;background:var(--accent);}
+
+/* CONFIRM */
+.confirm-box{margin:1rem 1.2rem;background:#fff;border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;}
+.confirm-header{background:var(--ink);padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;}
+.confirm-header .logo-row{display:flex;align-items:center;gap:.6rem;}
+.confirm-header img{height:15px;filter:brightness(0) invert(1);opacity:.8;}
+.confirm-header .sep{width:1px;height:12px;background:rgba(255,255,255,.2);}
+.confirm-order-id{font-family:'Syne',sans-serif;font-size:.55rem;letter-spacing:.2em;color:rgba(255,255,255,.4);}
+.confirm-items{padding:.8rem 1rem;}
+.confirm-item{display:flex;justify-content:space-between;align-items:baseline;padding:.4rem 0;border-bottom:1px solid var(--border2);font-size:.82rem;}
+.confirm-item:last-child{border-bottom:none;}
+.confirm-item-qty{color:var(--text3);font-size:.72rem;margin-left:.3rem;}
+.confirm-item-price{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:500;}
+.confirm-total-row{display:flex;justify-content:space-between;align-items:baseline;padding:.8rem 1rem .5rem;border-top:2px solid var(--ink);}
+.confirm-total-label{font-family:'Syne',sans-serif;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text2);}
+.confirm-total-val{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;}
+.confirm-info{border-top:1px solid var(--border2);padding:.7rem 1rem;}
+.confirm-info-row{display:flex;gap:.6rem;font-size:.75rem;padding:.25rem 0;border-bottom:1px dashed var(--border2);}
+.confirm-info-row:last-child{border-bottom:none;}
+.confirm-info-key{color:var(--text3);min-width:60px;flex-shrink:0;}
+.confirm-note{background:rgba(184,151,90,.15);border:1px solid rgba(184,151,90,.3);border-radius:var(--r);padding:.7rem .9rem;font-size:.72rem;color:var(--text2);line-height:1.7;margin:0 1.2rem .8rem;}
+.confirm-note strong{color:var(--gold);font-weight:500;}
+
+/* SUCCESS */
+.success-block{text-align:center;padding:2.5rem 1.4rem 1.5rem;}
+.success-icon{width:56px;height:56px;background:var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 1.2rem;}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--ink);margin-bottom:.5rem;}
+.success-sub{font-size:.8rem;color:var(--text3);line-height:1.8;letter-spacing:.02em;}
+.success-steps{margin:1.4rem 1.2rem .5rem;display:flex;flex-direction:column;gap:.5rem;}
+.success-step{background:#fff;border:1px solid var(--border2);border-radius:var(--r);padding:.75rem 1rem;display:flex;align-items:center;gap:.8rem;text-align:left;}
+.success-step-num{width:24px;height:24px;background:var(--gold);color:var(--ink);border-radius:50%;font-family:'Syne',sans-serif;font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.success-step-text{font-size:.78rem;color:var(--text2);line-height:1.5;}
+.success-step-text strong{color:var(--ink);font-weight:500;}
+
+/* BUTTONS */
+.action-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:.8rem 1.2rem;background:var(--paper);border-top:1px solid var(--border2);z-index:150;display:flex;flex-direction:column;gap:.5rem;}
+.btn-main{display:block;width:100%;padding:.85rem;background:var(--ink);color:#fff;border:none;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border-radius:var(--r);transition:background .2s;text-align:center;text-decoration:none;}
+.btn-main:hover{background:var(--ink2);}
+.btn-main.gold{background:var(--gold);color:var(--ink);}
+.btn-main.gold:hover{background:var(--gold2);}
+.btn-main.line-btn{background:#06c755;color:#fff;}
+.btn-main.line-btn:hover{background:#05b34c;}
+.btn-sub{display:block;width:100%;padding:.65rem;background:transparent;color:var(--text2);border:1px solid var(--border);font-family:'Syne',sans-serif;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;border-radius:var(--r);transition:border-color .2s,color .2s;text-align:center;text-decoration:none;}
+.btn-sub:hover{border-color:var(--gold-border);color:var(--ink);}
+.spacer-bottom{height:110px;}
+
+/* FLOAT LINE */
+.float-line{position:fixed;right:1rem;bottom:90px;z-index:300;width:48px;height:48px;background:#06c755;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(6,199,85,.35);text-decoration:none;font-size:1.3rem;transition:transform .2s;}
+.float-line:hover{transform:scale(1.08);}
+
+/* OFF-SCREEN ORDER CARD */
+#order-card{position:fixed;left:-9999px;top:0;width:360px;background:#fff;font-family:'Noto Sans TC',sans-serif;}
+.oc-header{background:#0d0d0d;padding:1.2rem 1.4rem .9rem;}
+.oc-logo-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;}
+.oc-logo-row img{height:16px;filter:brightness(0) invert(1);opacity:.85;}
+.oc-logo-sep{width:1px;height:12px;background:rgba(255,255,255,.2);}
+.oc-title{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff;margin-bottom:.15rem;}
+.oc-id{font-size:.58rem;letter-spacing:.12em;color:rgba(255,255,255,.35);}
+.oc-body{padding:1rem 1.4rem;}
+.oc-section-label{font-family:'Syne',sans-serif;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#8a867f;padding-bottom:.4rem;border-bottom:1px solid #e8e4de;margin-bottom:.4rem;}
+.oc-item-row{display:flex;justify-content:space-between;font-size:.78rem;padding:.3rem 0;border-bottom:1px solid #f0ede8;}
+.oc-item-row:last-of-type{border-bottom:none;}
+.oc-total{display:flex;justify-content:space-between;align-items:baseline;padding:.7rem 0 .4rem;border-top:2px solid #0d0d0d;margin-top:.2rem;}
+.oc-total-lbl{font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#5a5550;}
+.oc-total-val{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:500;}
+.oc-divider{height:1px;background:#e8e4de;margin:.6rem 0;}
+.oc-info-row{display:flex;gap:.5rem;font-size:.72rem;padding:.2rem 0;}
+.oc-info-key{color:#8a867f;min-width:56px;flex-shrink:0;}
+.oc-info-val{color:#0d0d0d;word-break:break-all;}
+.oc-footer{background:#0d0d0d;padding:.8rem 1.4rem;display:flex;justify-content:space-between;align-items:center;}
+.oc-footer-note{font-size:.58rem;color:rgba(255,255,255,.4);line-height:1.7;}
+.oc-footer-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.7rem;color:rgba(255,255,255,.3);text-align:right;}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-logos">
+    <img id="h-logo-lanjue" alt="蘭爵">
+    <div class="header-sep"></div>
+    <img id="h-logo-linket" alt="LINKet">
+  </div>
+  <div class="header-title">活動選購</div>
+  <button class="cart-btn" id="cart-toggle" aria-label="購物車">
+    🛒<span class="cart-badge" id="cart-badge">0</span>
+  </button>
+</header>
+
+<!-- STEPS -->
+<div class="steps">
+  <div class="step-item active" data-step="1"><div class="step-dot">1</div><span>選購</span></div>
+  <div class="step-connector"></div>
+  <div class="step-item" data-step="2"><div class="step-dot">2</div><span>確認</span></div>
+  <div class="step-connector"></div>
+  <div class="step-item" data-step="3"><div class="step-dot">3</div><span>資料</span></div>
+  <div class="step-connector"></div>
+  <div class="step-item" data-step="4"><div class="step-dot">4</div><span>完成</span></div>
+</div>
+
+<!-- STEP 1 -->
+<div id="step-1">
+  <div class="section-head">
+    <h2>今夜的選擇</h2>
+    <p>精選三款清酒 × LINKet 品牌數位名片</p>
+  </div>
+  <div class="cat-tabs" id="cat-tabs-bar">
+    <button class="cat-tab active" id="tab-sake">嵐爵酒選</button>
+    <button class="cat-tab" id="tab-linket">LINKet 數位名片</button>
+  </div>
+
+  <!-- SAKE -->
+  <div id="cat-sake" class="products-list">
+    <!-- 赤紅酵母 -->
+    <div class="prod-card" id="card-sekishoku">
+      <div class="prod-inner">
+        <div class="prod-img-wrap">
+          <div class="prod-img-placeholder" id="ph-sekishoku" style="display:none;">🍶</div>
+          <img id="img-sekishoku" alt="赤紅酵母">
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-origin">山形縣</span><div class="prod-type-dot"></div><span class="prod-type">純米大吟釀</span></div>
+          <div class="prod-name">赤紅酵母</div>
+          <div class="prod-name-en">Crimson Glory · 11% ABV</div>
+          <div class="prod-flavor">天然赤色酵母釀造，淡雅粉紅酒液，蜂蜜甘甜與草莓香氣，甘酸平衡令人回味。</div>
+          <div class="prod-tags"><span class="prod-tag">甘酸平衡</span><span class="prod-tag">草莓香</span><span class="prod-tag">天然粉紅</span></div>
+        </div>
+      </div>
+      <div class="prod-footer">
+        <div>
+          <div class="prod-price"><span>NT$</span>1,780</div>
+          <a href="https://tonylin1994code.github.io/Sekishoku/" target="_blank" class="prod-link">詳細介紹 →</a>
+        </div>
+        <div class="qty-control">
+          <button class="qty-btn" id="btn-sek-minus">−</button>
+          <div class="qty-num" id="qty-sekishoku">0</div>
+          <button class="qty-btn" id="btn-sek-plus">+</button>
+        </div>
+      </div>
+    </div>
+    <!-- 夢螢 -->
+    <div class="prod-card" id="card-yumebotaru">
+      <div class="prod-inner">
+        <div class="prod-img-wrap">
+          <div class="prod-img-placeholder" id="ph-yumebotaru" style="display:none;">🍶</div>
+          <img id="img-yumebotaru" alt="夢螢">
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-origin">福岡縣</span><div class="prod-type-dot"></div><span class="prod-type">純米吟釀</span></div>
+          <div class="prod-name">夢螢</div>
+          <div class="prod-name-en">Yumebotaru · 15% ABV</div>
+          <div class="prod-flavor">大賀酒造百年工藝，夢一献米精釀，清雅瑩潤如螢光，適飲溫度 10–15°C。</div>
+          <div class="prod-tags"><span class="prod-tag">清雅瑩潤</span><span class="prod-tag">食中酒</span><span class="prod-tag">百年酒蔵</span></div>
+        </div>
+      </div>
+      <div class="prod-footer">
+        <div>
+          <div class="prod-price"><span>NT$</span>1,680</div>
+          <a href="https://tonylin1994code.github.io/yumebotaru/" target="_blank" class="prod-link">詳細介紹 →</a>
+        </div>
+        <div class="qty-control">
+          <button class="qty-btn" id="btn-yume-minus">−</button>
+          <div class="qty-num" id="qty-yumebotaru">0</div>
+          <button class="qty-btn" id="btn-yume-plus">+</button>
+        </div>
+      </div>
+    </div>
+    <!-- 木陰之魚 -->
+    <div class="prod-card" id="card-kokage">
+      <div class="prod-inner">
+        <div class="prod-img-wrap">
+          <div class="prod-img-placeholder" id="ph-kokage" style="display:none;">🍶</div>
+          <img id="img-kokage" alt="木陰之魚">
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-origin">岡山縣</span><div class="prod-type-dot"></div><span class="prod-type">低酒精純米</span></div>
+          <div class="prod-name">木陰之魚</div>
+          <div class="prod-name-en">Kokage no Sakana · 8% ABV</div>
+          <div class="prod-flavor">協會701號酵母，超甘口低酒精，杏桃草莓酸甜，類白葡萄酒口感，輕盈易飲。</div>
+          <div class="prod-tags"><span class="prod-tag">超甘口</span><span class="prod-tag">低酒精</span><span class="prod-tag">2025金賞</span></div>
+        </div>
+      </div>
+      <div class="prod-footer">
+        <div>
+          <div class="prod-price"><span>NT$</span>1,380</div>
+          <a href="https://tonylin1994code.github.io/kokage-images/" target="_blank" class="prod-link">詳細介紹 →</a>
+        </div>
+        <div class="qty-control">
+          <button class="qty-btn" id="btn-kok-minus">−</button>
+          <div class="qty-num" id="qty-kokage">0</div>
+          <button class="qty-btn" id="btn-kok-plus">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINKET PLANS -->
+  <div id="cat-linket" class="plans-list" style="display:none;">
+    <div style="font-size:.75rem;color:var(--text3);line-height:1.7;padding:.2rem 0 .4rem;">選擇方案後，下一步填寫品牌基本資料，Tony 會與你確認細節。</div>
+    <!-- 體驗版 -->
+    <div class="plan-card" id="plan-experience">
+      <div class="plan-badge light">LINKet Light</div>
+      <div class="plan-name">體驗版</div>
+      <div class="plan-price-row"><div class="plan-price-big">6,000</div><div class="plan-price-unit">NT$ / 首年</div></div>
+      <div class="plan-note">第二年起維護費 NT$2,000/年</div>
+      <div class="plan-features">
+        <div class="plan-feat">一頁式登場頁（品牌登場頁＋客製化內容頁面 × 1）</div>
+        <div class="plan-feat">LINKet NFC 實體感應卡 × 1</div>
+        <div class="plan-feat">多連結整合（LINE、IG、官網等）</div>
+      </div>
+      <div class="plan-footer">
+        <div class="prod-price"><span>NT$</span>6,000</div>
+        <div class="qty-control">
+          <button class="qty-btn" id="btn-exp-minus">−</button>
+          <div class="qty-num" id="qty-experience">0</div>
+          <button class="qty-btn" id="btn-exp-plus">+</button>
+        </div>
+      </div>
+    </div>
+    <!-- 標準版 -->
+    <div class="plan-card" id="plan-standard">
+      <div class="plan-badge plus">LINKet Plus</div>
+      <div class="plan-name">標準版</div>
+      <div class="plan-price-row"><div class="plan-price-big">10,000</div><div class="plan-price-unit">NT$ / 首年</div></div>
+      <div class="plan-note">第二年起維護費 NT$2,000/年</div>
+      <div class="plan-features">
+        <div class="plan-feat">品牌微型網頁（品牌登場頁＋客製化頁面 × 3）</div>
+        <div class="plan-feat">品牌客製化感應卡 × 2</div>
+        <div class="plan-feat">多連結整合（LINE、IG、官網等）</div>
+        <div class="plan-feat">簡易 SEO 設定</div>
+        <div class="plan-feat">所有體驗版功能，全面升級</div>
+      </div>
+      <div class="plan-footer">
+        <div class="prod-price"><span>NT$</span>10,000</div>
+        <div class="qty-control">
+          <button class="qty-btn" id="btn-std-minus">−</button>
+          <div class="qty-num" id="qty-standard">0</div>
+          <button class="qty-btn" id="btn-std-plus">+</button>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:.68rem;color:var(--text3);padding:.4rem .2rem;line-height:1.8;">✦ 可選購多張名片方案　✦ 如需客製方案可與 Tony 洽談</div>
+  </div>
+
+  <div class="spacer-bottom"></div>
+</div>
+
+<!-- STEP 2 -->
+<div id="step-2" style="display:none;">
+  <div class="section-head"><h2>確認訂單</h2><p>請確認品項與數量無誤後繼續</p></div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-summary" id="cart-summary"></div>
+  <div class="cart-empty" id="cart-empty" style="display:none;"><div class="cart-empty-icon">🛒</div>購物車是空的<br>請回上一步選擇商品</div>
+  <div class="spacer-bottom"></div>
+  <div class="action-bar">
+    <button class="btn-main gold" id="btn-to-step3">填寫訂購資料 →</button>
+    <button class="btn-sub" id="btn-back-to-1">← 繼續選購</button>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div id="step-3" style="display:none;">
+  <div class="section-head"><h2>訂購人資料</h2><p>資料將用於製作訂單，請確實填寫</p></div>
+  <div class="form-section">
+    <div class="form-section-label">聯絡資訊</div>
+    <div class="form-group">
+      <label class="form-label">姓名 <span class="req">*</span></label>
+      <input type="text" id="f-name" class="form-input" placeholder="您的稱呼" autocomplete="name">
+      <div class="error-msg" id="e-name">請填寫姓名</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">手機號碼 <span class="req">*</span></label>
+      <input type="tel" id="f-phone" class="form-input" placeholder="09xx-xxxxxx" autocomplete="tel">
+      <div class="error-msg" id="e-phone">請填寫有效的手機號碼</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">LINE ID <span class="req">*</span></label>
+      <input type="text" id="f-line" class="form-input" placeholder="@your_line_id">
+      <div class="error-msg" id="e-line">請填寫 LINE ID</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">備註</label>
+      <textarea id="f-note" class="form-textarea" placeholder="如有特殊需求請備注…"></textarea>
+    </div>
+    <div id="linket-section" style="display:none;">
+      <div class="form-divider"></div>
+      <div class="form-section-label">LINKet 品牌資料</div>
+      <div style="font-size:.72rem;color:var(--text3);margin-bottom:.6rem;line-height:1.7;">以下資料用於製作你的 LINKet 頁面初稿，Tony 會再次確認細節。</div>
+      <div class="linket-fields">
+        <div class="linket-fields-title">品牌基本資訊</div>
+        <div class="form-group">
+          <label class="form-label">品牌 / 公司名稱 <span class="req">*</span></label>
+          <input type="text" id="f-brand" class="form-input" placeholder="您的品牌或公司名稱">
+          <div class="error-msg" id="e-brand">請填寫品牌名稱</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">職稱 / 角色</label>
+          <input type="text" id="f-role" class="form-input" placeholder="例：創辦人、品牌顧問">
+        </div>
+        <div class="form-group">
+          <label class="form-label">品牌官網或 IG</label>
+          <input type="text" id="f-website" class="form-input" placeholder="https://">
+        </div>
+        <div class="form-group">
+          <label class="form-label">想展示的連結（可多個，換行分隔）</label>
+          <textarea id="f-links" class="form-textarea" placeholder="LINE 官方帳號&#10;Instagram&#10;作品集…"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">品牌風格描述</label>
+          <textarea id="f-style" class="form-textarea" placeholder="例：極簡黑白風、溫暖手感系…"></textarea>
+          <div class="form-hint">Tony 將依此作為設計參考</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spacer-bottom"></div>
+  <div class="action-bar">
+    <button class="btn-main gold" id="btn-submit">確認並生成訂單 →</button>
+    <button class="btn-sub" id="btn-back-to-2">← 修改訂單</button>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div id="step-4" style="display:none;">
+  <div class="success-block">
+    <div class="success-icon">✓</div>
+    <div class="success-title">訂單已建立</div>
+    <div class="success-sub">請完成以下步驟，<br>Tony 會盡快與你確認訂單與付款方式。</div>
+  </div>
+  <div class="success-steps">
+    <div class="success-step"><div class="success-step-num">1</div><div class="success-step-text">點擊下方「<strong>下載訂單圖片</strong>」，儲存到相簿</div></div>
+    <div class="success-step"><div class="success-step-num">2</div><div class="success-step-text">點擊「<strong>加入 LINKet LINE</strong>」，加好友後傳送訂單圖片</div></div>
+    <div class="success-step"><div class="success-step-num">3</div><div class="success-step-text">Tony 將在 LINE 上確認訂單並提供<strong>付款方式</strong></div></div>
+  </div>
+  <div class="confirm-note"><strong>溫馨提示：</strong>訂單圖片僅為紀錄，正式訂單以 LINE 確認為準。</div>
+  <div class="confirm-box" id="order-preview"></div>
+  <div class="spacer-bottom"></div>
+  <div class="action-bar">
+    <button class="btn-main gold" id="btn-download">⬇ 下載訂單圖片</button>
+    <a href="https://lin.ee/UgaIhG7" target="_blank" class="btn-main line-btn">加入 LINKet 官方 LINE →</a>
+    <button class="btn-sub" id="btn-reset">重新選購</button>
+  </div>
+</div>
+
+</div><!-- /page-wrap -->
+
+<!-- OFF-SCREEN ORDER CARD -->
+<div id="order-card"></div>
+
+<!-- FLOATING LINE -->
+<a href="https://lin.ee/UgaIhG7" target="_blank" class="float-line">💬</a>
+
+<!-- CART BAR -->
+<div class="cart-bar" id="cart-bar">
+  <div class="cart-bar-info">
+    <div class="cart-bar-count" id="cart-bar-count">已選 0 項</div>
+    <div class="cart-bar-total"><span>NT$</span><span id="cart-bar-total">0</span></div>
+  </div>
+  <button class="cart-proceed-btn" id="btn-cart-proceed">查看訂單 →</button>
+</div>
+
+<script>
+(function() {
+'use strict';
+
+/* ── CONSTANTS ── */
+var LANJUE_LOGO = 'https://raw.githubusercontent.com/TonyLin1994code/logo/c2dda061cdf79ebc9ae86656ffba713cb7dc067d/logo-lanjue.svg';
+var LINKET_LOGO = 'https://raw.githubusercontent.com/TonyLin1994code/logo/c2dda061cdf79ebc9ae86656ffba713cb7dc067d/logo-linket.svg';
+
+var PRODUCTS = {
+  sekishoku: { name:'赤紅酵母', nameEn:'Crimson Glory', origin:'山形縣 富士酒造', type:'純米大吟釀', price:1780, img:'https://raw.githubusercontent.com/TonyLin1994code/Sekishoku/03ba7509c080afc4ee403bec176dd015a828c738/Sekishoku-bottle.png' },
+  yumebotaru: { name:'夢螢', nameEn:'Yumebotaru', origin:'福岡縣 大賀酒造', type:'純米吟釀', price:1680, img:'https://raw.githubusercontent.com/TonyLin1994code/yumebotaru/fb02f1a44aff50244f323ffc9405d17b1fac01e4/yumebotaru-bottle.png' },
+  kokage: { name:'木陰之魚', nameEn:'Kokage no Sakana', origin:'岡山縣 嘉美心酒造', type:'低酒精純米', price:1380, img:'https://raw.githubusercontent.com/TonyLin1994code/kokage-images/99cacba88ddcc73b08afc37f8a746207aac6b3c4/okage-bottle.png' }
+};
+var PLANS = {
+  experience: { name:'LINKet 體驗版', nameEn:'LINKet Light', price:6000, desc:'一頁式登場頁＋客製化頁面×1 + NFC 感應卡×1' },
+  standard: { name:'LINKet 標準版', nameEn:'LINKet Plus', price:10000, desc:'品牌微型網頁＋客製化頁面×3 + NFC 感應卡×2' }
+};
+
+/* ── STATE ── */
+var cart = { sekishoku:0, yumebotaru:0, kokage:0 };
+var planCart = { experience:0, standard:0 };
+var orderData = {};
+var currentStep = 1;
+
+/* ── INIT LOGOS & IMAGES ── */
+document.getElementById('h-logo-lanjue').src = LANJUE_LOGO;
+document.getElementById('h-logo-linket').src = LINKET_LOGO;
+
+function setupImg(imgId, phId, src) {
+  var img = document.getElementById(imgId);
+  var ph = document.getElementById(phId);
+  img.src = src;
+  img.onload = function() { ph.style.display = 'none'; img.style.display = 'block'; };
+  img.onerror = function() { img.style.display = 'none'; ph.style.display = 'flex'; };
+}
+setupImg('img-sekishoku', 'ph-sekishoku', PRODUCTS.sekishoku.img);
+setupImg('img-yumebotaru', 'ph-yumebotaru', PRODUCTS.yumebotaru.img);
+setupImg('img-kokage', 'ph-kokage', PRODUCTS.kokage.img);
+
+/* ── HELPERS ── */
+function getTotals() {
+  var total = 0, items = 0;
+  var ids = Object.keys(cart);
+  for (var i = 0; i < ids.length; i++) {
+    total += PRODUCTS[ids[i]].price * cart[ids[i]];
+    items += cart[ids[i]];
+  }
+  var pids = Object.keys(planCart);
+  for (var j = 0; j < pids.length; j++) {
+    total += PLANS[pids[j]].price * planCart[pids[j]];
+    items += planCart[pids[j]];
+  }
+  return { total: total, items: items };
+}
+
+function updateCartBar() {
+  var t = getTotals();
+  var badge = document.getElementById('cart-badge');
+  badge.textContent = t.items;
+  if (t.items > 0) {
+    badge.classList.add('show');
+    document.getElementById('cart-bar').classList.add('show');
+  } else {
+    badge.classList.remove('show');
+    document.getElementById('cart-bar').classList.remove('show');
+  }
+  document.getElementById('cart-bar-count').textContent = '已選 ' + t.items + ' 項';
+  document.getElementById('cart-bar-total').textContent = t.total.toLocaleString();
+}
+
+function setStep(n) {
+  currentStep = n;
+  for (var i = 1; i <= 4; i++) {
+    document.getElementById('step-' + i).style.display = i === n ? 'block' : 'none';
+  }
+  var stepEls = document.querySelectorAll('.step-item');
+  for (var s = 0; s < stepEls.length; s++) {
+    var num = parseInt(stepEls[s].getAttribute('data-step'));
+    stepEls[s].classList.remove('active', 'done');
+    if (num === n) stepEls[s].classList.add('active');
+    else if (num < n) stepEls[s].classList.add('done');
+  }
+  if (n !== 1) document.getElementById('cart-bar').classList.remove('show');
+  else updateCartBar();
+  window.scrollTo(0, 0);
+}
+
+/* ── QTY LOGIC ── */
+function changeSakeQty(id, delta) {
+  cart[id] = Math.max(0, cart[id] + delta);
+  document.getElementById('qty-' + id).textContent = cart[id];
+  if (cart[id] > 0) document.getElementById('card-' + id).classList.add('in-cart');
+  else document.getElementById('card-' + id).classList.remove('in-cart');
+  updateCartBar();
+}
+
+function changePlanQty(id, delta) {
+  planCart[id] = Math.max(0, planCart[id] + delta);
+  document.getElementById('qty-' + id).textContent = planCart[id];
+  if (planCart[id] > 0) document.getElementById('plan-' + id).classList.add('in-cart');
+  else document.getElementById('plan-' + id).classList.remove('in-cart');
+  updateCartBar();
+}
+
+/* ── CATEGORY TABS ── */
+document.getElementById('tab-sake').addEventListener('click', function() {
+  document.getElementById('tab-sake').classList.add('active');
+  document.getElementById('tab-linket').classList.remove('active');
+  document.getElementById('cat-sake').style.display = 'flex';
+  document.getElementById('cat-linket').style.display = 'none';
+});
+document.getElementById('tab-linket').addEventListener('click', function() {
+  document.getElementById('tab-linket').classList.add('active');
+  document.getElementById('tab-sake').classList.remove('active');
+  document.getElementById('cat-linket').style.display = 'flex';
+  document.getElementById('cat-sake').style.display = 'none';
+});
+
+/* ── SAKE BUTTONS ── */
+document.getElementById('btn-sek-minus').addEventListener('click', function() { changeSakeQty('sekishoku', -1); });
+document.getElementById('btn-sek-plus').addEventListener('click', function() { changeSakeQty('sekishoku', 1); });
+document.getElementById('btn-yume-minus').addEventListener('click', function() { changeSakeQty('yumebotaru', -1); });
+document.getElementById('btn-yume-plus').addEventListener('click', function() { changeSakeQty('yumebotaru', 1); });
+document.getElementById('btn-kok-minus').addEventListener('click', function() { changeSakeQty('kokage', -1); });
+document.getElementById('btn-kok-plus').addEventListener('click', function() { changeSakeQty('kokage', 1); });
+
+/* ── PLAN BUTTONS ── */
+document.getElementById('btn-exp-minus').addEventListener('click', function() { changePlanQty('experience', -1); });
+document.getElementById('btn-exp-plus').addEventListener('click', function() { changePlanQty('experience', 1); });
+document.getElementById('btn-std-minus').addEventListener('click', function() { changePlanQty('standard', -1); });
+document.getElementById('btn-std-plus').addEventListener('click', function() { changePlanQty('standard', 1); });
+
+/* ── CART TOGGLE ── */
+document.getElementById('cart-toggle').addEventListener('click', function() {
+  if (currentStep === 1 && getTotals().items > 0) goToStep2();
+});
+document.getElementById('btn-cart-proceed').addEventListener('click', goToStep2);
+document.getElementById('btn-back-to-1').addEventListener('click', function() { setStep(1); updateCartBar(); });
+document.getElementById('btn-to-step3').addEventListener('click', function() { setStep(3); showLinketSection(); });
+document.getElementById('btn-back-to-2').addEventListener('click', function() { renderCartStep(); setStep(2); });
+document.getElementById('btn-submit').addEventListener('click', handleSubmit);
+document.getElementById('btn-download').addEventListener('click', downloadOrder);
+document.getElementById('btn-reset').addEventListener('click', resetAll);
+
+/* ── NAVIGATION ── */
+function goToStep2() {
+  if (getTotals().items === 0) { alert('請至少選擇一項商品或方案'); return; }
+  renderCartStep();
+  setStep(2);
+}
+
+function showLinketSection() {
+  var hasPlan = false;
+  var pids = Object.keys(planCart);
+  for (var i = 0; i < pids.length; i++) { if (planCart[pids[i]] > 0) { hasPlan = true; break; } }
+  document.getElementById('linket-section').style.display = hasPlan ? 'block' : 'none';
+}
+
+/* ── RENDER CART ── */
+function renderCartStep() {
+  var listEl = document.getElementById('cart-items-list');
+  var summaryEl = document.getElementById('cart-summary');
+  var emptyEl = document.getElementById('cart-empty');
+  listEl.innerHTML = '';
+  summaryEl.innerHTML = '';
+
+  var t = getTotals();
+  if (t.items === 0) { emptyEl.style.display = 'block'; return; }
+  emptyEl.style.display = 'none';
+
+  var subtotalSake = 0;
+  var sakeIds = Object.keys(cart);
+  for (var i = 0; i < sakeIds.length; i++) {
+    var sid = sakeIds[i];
+    if (cart[sid] === 0) continue;
+    var p = PRODUCTS[sid];
+    var lineTotal = p.price * cart[sid];
+    subtotalSake += lineTotal;
+
+    var div = document.createElement('div');
+    div.className = 'cart-item';
+
+    var imgDiv = document.createElement('div');
+    imgDiv.className = 'cart-item-img';
+    var img = document.createElement('img');
+    img.src = p.img;
+    img.alt = p.name;
+    img.onerror = (function(el) { return function() { el.style.display = 'none'; el.parentElement.innerHTML = '<div class="cart-item-img-placeholder">🍶</div>'; }; })(img);
+    imgDiv.appendChild(img);
+
+    var infoDiv = document.createElement('div');
+    infoDiv.className = 'cart-item-info';
+    infoDiv.innerHTML = '<div class="cart-item-name">' + p.name + '</div><div class="cart-item-sub">' + p.type + ' · ' + p.origin + '</div>';
+
+    var qtyDiv = document.createElement('div');
+    qtyDiv.className = 'qty-control';
+    qtyDiv.style.marginTop = '.4rem';
+    var minusBtn = document.createElement('button');
+    minusBtn.className = 'qty-btn';
+    minusBtn.textContent = '−';
+    var qtyNum = document.createElement('div');
+    qtyNum.className = 'qty-num';
+    qtyNum.textContent = cart[sid];
+    var plusBtn = document.createElement('button');
+    plusBtn.className = 'qty-btn';
+    plusBtn.textContent = '+';
+    (function(id, qn) {
+      minusBtn.addEventListener('click', function() { changeSakeQty(id, -1); qn.textContent = cart[id]; updateCartSummary(); });
+      plusBtn.addEventListener('click', function() { changeSakeQty(id, 1); qn.textContent = cart[id]; updateCartSummary(); });
+    })(sid, qtyNum);
+    qtyDiv.appendChild(minusBtn);
+    qtyDiv.appendChild(qtyNum);
+    qtyDiv.appendChild(plusBtn);
+    infoDiv.appendChild(qtyDiv);
+
+    var rightDiv = document.createElement('div');
+    rightDiv.className = 'cart-item-right';
+    var priceEl = document.createElement('div');
+    priceEl.className = 'cart-item-price';
+    priceEl.textContent = 'NT$ ' + lineTotal.toLocaleString();
+    var removeBtn = document.createElement('button');
+    removeBtn.className = 'cart-item-remove';
+    removeBtn.textContent = '移除';
+    (function(id) {
+      removeBtn.addEventListener('click', function() { cart[id] = 0; document.getElementById('qty-' + id).textContent = '0'; document.getElementById('card-' + id).classList.remove('in-cart'); updateCartBar(); renderCartStep(); });
+    })(sid);
+    rightDiv.appendChild(priceEl);
+    rightDiv.appendChild(removeBtn);
+
+    div.appendChild(imgDiv);
+    div.appendChild(infoDiv);
+    div.appendChild(rightDiv);
+    listEl.appendChild(div);
+  }
+
+  var subtotalPlan = 0;
+  var pids = Object.keys(planCart);
+  for (var j = 0; j < pids.length; j++) {
+    var pid = pids[j];
+    if (planCart[pid] === 0) continue;
+    var pl = PLANS[pid];
+    var plLine = pl.price * planCart[pid];
+    subtotalPlan += plLine;
+
+    var pdiv = document.createElement('div');
+    pdiv.className = 'cart-item';
+
+    var pimgDiv = document.createElement('div');
+    pimgDiv.className = 'cart-item-img';
+    pimgDiv.innerHTML = '<div class="cart-item-img-placeholder">💳</div>';
+
+    var pinfoDiv = document.createElement('div');
+    pinfoDiv.className = 'cart-item-info';
+    pinfoDiv.innerHTML = '<div class="cart-item-name">' + pl.name + '</div><div class="cart-item-sub">' + pl.desc + '</div>';
+
+    var pqtyDiv = document.createElement('div');
+    pqtyDiv.className = 'qty-control';
+    pqtyDiv.style.marginTop = '.4rem';
+    var pminusBtn = document.createElement('button');
+    pminusBtn.className = 'qty-btn';
+    pminusBtn.textContent = '−';
+    var pqtyNum = document.createElement('div');
+    pqtyNum.className = 'qty-num';
+    pqtyNum.textContent = planCart[pid];
+    var pplusBtn = document.createElement('button');
+    pplusBtn.className = 'qty-btn';
+    pplusBtn.textContent = '+';
+    (function(id, qn) {
+      pminusBtn.addEventListener('click', function() { changePlanQty(id, -1); qn.textContent = planCart[id]; updateCartSummary(); });
+      pplusBtn.addEventListener('click', function() { changePlanQty(id, 1); qn.textContent = planCart[id]; updateCartSummary(); });
+    })(pid, pqtyNum);
+    pqtyDiv.appendChild(pminusBtn);
+    pqtyDiv.appendChild(pqtyNum);
+    pqtyDiv.appendChild(pplusBtn);
+    pinfoDiv.appendChild(pqtyDiv);
+
+    var prightDiv = document.createElement('div');
+    prightDiv.className = 'cart-item-right';
+    var ppriceEl = document.createElement('div');
+    ppriceEl.className = 'cart-item-price';
+    ppriceEl.textContent = 'NT$ ' + plLine.toLocaleString();
+    var premoveBtn = document.createElement('button');
+    premoveBtn.className = 'cart-item-remove';
+    premoveBtn.textContent = '移除';
+    (function(id) {
+      premoveBtn.addEventListener('click', function() { planCart[id] = 0; document.getElementById('qty-' + id).textContent = '0'; document.getElementById('plan-' + id).classList.remove('in-cart'); updateCartBar(); renderCartStep(); });
+    })(pid);
+    prightDiv.appendChild(ppriceEl);
+    prightDiv.appendChild(premoveBtn);
+
+    pdiv.appendChild(pimgDiv);
+    pdiv.appendChild(pinfoDiv);
+    pdiv.appendChild(prightDiv);
+    listEl.appendChild(pdiv);
+  }
+
+  updateCartSummary();
+
+  function updateCartSummary() {
+    var st = getTotals();
+    var sk = 0, pl = 0;
+    var sks = Object.keys(cart);
+    for (var a = 0; a < sks.length; a++) sk += PRODUCTS[sks[a]].price * cart[sks[a]];
+    var pls = Object.keys(planCart);
+    for (var b = 0; b < pls.length; b++) pl += PLANS[pls[b]].price * planCart[pls[b]];
+    var html = '';
+    if (sk > 0) html += '<div class="cart-row"><span>清酒小計</span><span>NT$ ' + sk.toLocaleString() + '</span></div>';
+    if (pl > 0) html += '<div class="cart-row"><span>LINKet 方案</span><span>NT$ ' + pl.toLocaleString() + '</span></div>';
+    html += '<div class="cart-row total"><span>總金額</span><span><span>NT$</span>' + st.total.toLocaleString() + '</span></div>';
+    summaryEl.innerHTML = html;
+  }
+}
+
+/* ── FORM VALIDATION ── */
+function validateForm() {
+  var ok = true;
+  function check(id, errId, fn) {
+    var el = document.getElementById(id);
+    var err = document.getElementById(errId);
+    var val = el.value.trim();
+    if (!fn(val)) { el.classList.add('error'); err.classList.add('show'); if (ok) { el.scrollIntoView({ behavior:'smooth', block:'center' }); } ok = false; }
+    else { el.classList.remove('error'); err.classList.remove('show'); }
+  }
+  check('f-name', 'e-name', function(v) { return v.length > 0; });
+  check('f-phone', 'e-phone', function(v) { return /^09\d{8}$/.test(v.replace(/[-\s]/g, '')); });
+  check('f-line', 'e-line', function(v) { return v.length > 0; });
+  var hasPlan = false;
+  var pids = Object.keys(planCart);
+  for (var i = 0; i < pids.length; i++) { if (planCart[pids[i]] > 0) { hasPlan = true; break; } }
+  if (hasPlan) check('f-brand', 'e-brand', function(v) { return v.length > 0; });
+  return ok;
+}
+
+/* ── SUBMIT ── */
+function handleSubmit() {
+  if (!validateForm()) return;
+  buildOrderData();
+  renderConfirm();
+  setStep(4);
+}
+
+/* ── BUILD ORDER DATA ── */
+function buildOrderData() {
+  var now = new Date();
+  var pad = function(n) { return String(n).padStart(2, '0'); };
+  var orderId = 'LK-' + String(now.getFullYear()).slice(2) + pad(now.getMonth()+1) + pad(now.getDate()) + '-' + pad(now.getHours()) + pad(now.getMinutes());
+  var dateStr = now.getFullYear() + '/' + (now.getMonth()+1) + '/' + now.getDate() + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes());
+
+  var items = [];
+  var sids = Object.keys(cart);
+  for (var i = 0; i < sids.length; i++) {
+    if (cart[sids[i]] > 0) {
+      var p = PRODUCTS[sids[i]];
+      items.push({ name: p.name, qty: cart[sids[i]], price: p.price, lineTotal: p.price * cart[sids[i]] });
+    }
+  }
+  var pids = Object.keys(planCart);
+  for (var j = 0; j < pids.length; j++) {
+    if (planCart[pids[j]] > 0) {
+      var pl = PLANS[pids[j]];
+      items.push({ name: pl.name, qty: planCart[pids[j]], price: pl.price, lineTotal: pl.price * planCart[pids[j]] });
+    }
+  }
+  var total = 0;
+  for (var k = 0; k < items.length; k++) total += items[k].lineTotal;
+
+  var hasPlan = false;
+  for (var m = 0; m < pids.length; m++) { if (planCart[pids[m]] > 0) { hasPlan = true; break; } }
+
+  orderData = {
+    orderId: orderId, date: dateStr, items: items, total: total,
+    customer: {
+      name: document.getElementById('f-name').value.trim(),
+      phone: document.getElementById('f-phone').value.trim(),
+      line: document.getElementById('f-line').value.trim(),
+      note: document.getElementById('f-note').value.trim()
+    },
+    brand: hasPlan ? {
+      brandName: document.getElementById('f-brand').value.trim(),
+      role: document.getElementById('f-role').value.trim(),
+      website: document.getElementById('f-website').value.trim(),
+      links: document.getElementById('f-links').value.trim(),
+      style: document.getElementById('f-style').value.trim()
+    } : null
+  };
+}
+
+/* ── RENDER CONFIRM ── */
+function renderConfirm() {
+  var o = orderData;
+  var itemsHtml = '';
+  for (var i = 0; i < o.items.length; i++) {
+    var it = o.items[i];
+    itemsHtml += '<div class="confirm-item"><span>' + it.name + '<span class="confirm-item-qty"> × ' + it.qty + '</span></span><span class="confirm-item-price">NT$ ' + it.lineTotal.toLocaleString() + '</span></div>';
+  }
+  var infoHtml = '<div class="confirm-info-row"><span class="confirm-info-key">姓名</span><span>' + o.customer.name + '</span></div>' +
+    '<div class="confirm-info-row"><span class="confirm-info-key">手機</span><span>' + o.customer.phone + '</span></div>' +
+    '<div class="confirm-info-row"><span class="confirm-info-key">LINE</span><span>' + o.customer.line + '</span></div>' +
+    (o.customer.note ? '<div class="confirm-info-row"><span class="confirm-info-key">備註</span><span>' + o.customer.note + '</span></div>' : '') +
+    (o.brand ? '<div class="confirm-info-row"><span class="confirm-info-key">品牌</span><span>' + o.brand.brandName + '</span></div>' : '');
+
+  document.getElementById('order-preview').innerHTML =
+    '<div class="confirm-header"><div class="logo-row"><img src="' + LANJUE_LOGO + '" alt="蘭爵"><div class="sep"></div><img src="' + LINKET_LOGO + '" alt="LINKet"></div><div class="confirm-order-id">' + o.orderId + '</div></div>' +
+    '<div class="confirm-items">' + itemsHtml + '</div>' +
+    '<div class="confirm-total-row"><span class="confirm-total-label">總金額</span><span class="confirm-total-val">NT$ ' + o.total.toLocaleString() + '</span></div>' +
+    '<div class="confirm-info">' + infoHtml + '</div>';
+
+  buildOrderCard();
+}
+
+/* ── BUILD ORDER CARD ── */
+function buildOrderCard() {
+  var o = orderData;
+  var rows = '';
+  for (var i = 0; i < o.items.length; i++) {
+    var it = o.items[i];
+    rows += '<div class="oc-item-row"><span>' + it.name + ' × ' + it.qty + '</span><span>NT$ ' + it.lineTotal.toLocaleString() + '</span></div>';
+  }
+  var infoRows = '<div class="oc-info-row"><span class="oc-info-key">姓名</span><span class="oc-info-val">' + o.customer.name + '</span></div>' +
+    '<div class="oc-info-row"><span class="oc-info-key">手機</span><span class="oc-info-val">' + o.customer.phone + '</span></div>' +
+    '<div class="oc-info-row"><span class="oc-info-key">LINE</span><span class="oc-info-val">' + o.customer.line + '</span></div>' +
+    (o.customer.note ? '<div class="oc-info-row"><span class="oc-info-key">備註</span><span class="oc-info-val">' + o.customer.note + '</span></div>' : '');
+  var brandRows = '';
+  if (o.brand) {
+    brandRows = '<div class="oc-divider"></div><div class="oc-section-label">LINKet 品牌資料</div>' +
+      '<div class="oc-info-row"><span class="oc-info-key">品牌</span><span class="oc-info-val">' + o.brand.brandName + '</span></div>' +
+      (o.brand.role ? '<div class="oc-info-row"><span class="oc-info-key">職稱</span><span class="oc-info-val">' + o.brand.role + '</span></div>' : '') +
+      (o.brand.website ? '<div class="oc-info-row"><span class="oc-info-key">官網</span><span class="oc-info-val">' + o.brand.website + '</span></div>' : '') +
+      (o.brand.links ? '<div class="oc-info-row"><span class="oc-info-key">展示連結</span><span class="oc-info-val" style="white-space:pre-wrap;">' + o.brand.links + '</span></div>' : '') +
+      (o.brand.style ? '<div class="oc-info-row"><span class="oc-info-key">風格</span><span class="oc-info-val">' + o.brand.style + '</span></div>' : '');
+  }
+  document.getElementById('order-card').innerHTML =
+    '<div class="oc-header"><div class="oc-logo-row"><img src="' + LANJUE_LOGO + '" alt="蘭爵"><div class="oc-logo-sep"></div><img src="' + LINKET_LOGO + '" alt="LINKet"></div><div class="oc-title">活動訂單</div><div class="oc-id">' + o.orderId + ' · ' + o.date + '</div></div>' +
+    '<div class="oc-body"><div class="oc-section-label">訂購品項</div>' + rows + '<div class="oc-total"><span class="oc-total-lbl">總金額</span><span class="oc-total-val">NT$ ' + o.total.toLocaleString() + '</span></div><div class="oc-divider"></div><div class="oc-section-label">訂購人資料</div>' + infoRows + brandRows + '</div>' +
+    '<div class="oc-footer"><div class="oc-footer-note">請將此圖片傳送至 LINKet LINE 官方帳號<br>Tony 將確認訂單並提供付款資訊</div><div class="oc-footer-brand">蘭爵私選 × LINKet<br>lin.ee/UgaIhG7</div></div>';
+}
+
+/* ── DOWNLOAD ── */
+function downloadOrder() {
+  var btn = document.getElementById('btn-download');
+  btn.textContent = '⏳ 生成中…';
+  btn.disabled = true;
+  setTimeout(function() {
+    html2canvas(document.getElementById('order-card'), { scale:2, useCORS:true, allowTaint:false, backgroundColor:'#ffffff', logging:false })
+      .then(function(canvas) {
+        var a = document.createElement('a');
+        a.download = orderData.orderId + '.png';
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+        btn.textContent = '✓ 已下載！請傳送至 LINE';
+        btn.style.background = '#2d6a4f';
+      })
+      .catch(function() {
+        btn.textContent = '⬇ 重新下載';
+        btn.disabled = false;
+        alert('下載失敗，請截圖儲存訂單。');
+      });
+  }, 400);
+}
+
+/* ── RESET ── */
+function resetAll() {
+  if (!confirm('確定要清空購物車並重新開始？')) return;
+  var sids = Object.keys(cart);
+  for (var i = 0; i < sids.length; i++) {
+    cart[sids[i]] = 0;
+    document.getElementById('qty-' + sids[i]).textContent = '0';
+    document.getElementById('card-' + sids[i]).classList.remove('in-cart');
+  }
+  var pids = Object.keys(planCart);
+  for (var j = 0; j < pids.length; j++) {
+    planCart[pids[j]] = 0;
+    document.getElementById('qty-' + pids[j]).textContent = '0';
+    document.getElementById('plan-' + pids[j]).classList.remove('in-cart');
+  }
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-phone').value = '';
+  document.getElementById('f-line').value = '';
+  document.getElementById('f-note').value = '';
+  document.getElementById('f-brand').value = '';
+  document.getElementById('f-role').value = '';
+  document.getElementById('f-website').value = '';
+  document.getElementById('f-links').value = '';
+  document.getElementById('f-style').value = '';
+  var btn = document.getElementById('btn-download');
+  btn.textContent = '⬇ 下載訂單圖片';
+  btn.disabled = false;
+  btn.style.background = '';
+  setStep(1);
+  updateCartBar();
+}
+
+})();
+</script>
+</body>
+</html>

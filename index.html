@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>蘭爵私選 × LINKet｜活動選購</title>
+<title>嵐爵私選 × LINKet｜活動選購</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+TC:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -157,7 +157,13 @@ img{display:block;}
 .form-section-label::before{content:'';width:3px;height:16px;background:var(--gold);flex-shrink:0;}
 .error-msg{font-size:.7rem;color:var(--red);margin-top:.2rem;display:none;}
 .error-msg.show{display:block;}
+.radio-group{display:flex;flex-direction:column;gap:.5rem;}
+.radio-item{display:flex;align-items:center;gap:.6rem;cursor:pointer;padding:.55rem .7rem;border:1px solid var(--border);border-radius:var(--r);background:#fff;transition:border-color .2s,background .2s;}
+.radio-item:has(input:checked){border-color:var(--gold);background:rgba(184,151,90,.06);}
+.radio-item input[type=radio]{width:16px;height:16px;accent-color:var(--gold);flex-shrink:0;}
+.radio-label{font-size:.85rem;color:var(--text);}
 .linket-fields{background:rgba(37,53,134,.04);border:1px solid rgba(37,53,134,.12);border-radius:var(--r);padding:.9rem;display:flex;flex-direction:column;gap:1rem;}
+
 .linket-fields-title{font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.4rem;}
 .linket-fields-title::before{content:'';width:16px;height:1px;background:var(--accent);}
 
@@ -240,7 +246,7 @@ img{display:block;}
 <!-- HEADER -->
 <header class="site-header">
   <div class="header-logos">
-    <img id="h-logo-lanjue" alt="蘭爵">
+    <img id="h-logo-lanjue" alt="嵐爵">
     <div class="header-sep"></div>
     <img id="h-logo-linket" alt="LINKet">
   </div>
@@ -442,8 +448,26 @@ img{display:block;}
       <div class="error-msg" id="e-line">請填寫 LINE ID</div>
     </div>
     <div class="form-group">
+      <label class="form-label">取貨方式 <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-item">
+          <input type="radio" name="delivery" id="r-pickup" value="pickup" checked>
+          <span class="radio-label">現場自取</span>
+        </label>
+        <label class="radio-item">
+          <input type="radio" name="delivery" id="r-shipping" value="shipping">
+          <span class="radio-label">宅配運送（運費另計）</span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group" id="shipping-address-group" style="display:none;">
+      <label class="form-label">寄件地址 <span class="req">*</span></label>
+      <input type="text" id="f-address" class="form-input" placeholder="縣市、鄉鎮市區、路段、號樓">
+      <div class="error-msg" id="e-address">請填寫寄件地址</div>
+    </div>
+    <div class="form-group">
       <label class="form-label">備註</label>
-      <textarea id="f-note" class="form-textarea" placeholder="如有特殊需求請備注…"></textarea>
+      <textarea id="f-note" class="form-textarea" placeholder="如有其他需求請備注…"></textarea>
     </div>
     <div id="linket-section" style="display:none;">
       <div class="form-divider"></div>
@@ -460,17 +484,32 @@ img{display:block;}
           <label class="form-label">職稱 / 角色</label>
           <input type="text" id="f-role" class="form-input" placeholder="例：創辦人、品牌顧問">
         </div>
+        <div class="form-divider"></div>
+        <div class="linket-fields-title">想展示的連結</div>
         <div class="form-group">
-          <label class="form-label">品牌官網或 IG</label>
-          <input type="text" id="f-website" class="form-input" placeholder="https://">
+          <label class="form-label">LINE</label>
+          <input type="text" id="f-link-line" class="form-input" placeholder="LINE 官方帳號或個人 ID">
         </div>
         <div class="form-group">
-          <label class="form-label">想展示的連結（可多個，換行分隔）</label>
-          <textarea id="f-links" class="form-textarea" placeholder="LINE 官方帳號&#10;Instagram&#10;作品集…"></textarea>
+          <label class="form-label">官網</label>
+          <input type="text" id="f-link-web" class="form-input" placeholder="https://yourwebsite.com">
         </div>
         <div class="form-group">
-          <label class="form-label">品牌風格描述</label>
-          <textarea id="f-style" class="form-textarea" placeholder="例：極簡黑白風、溫暖手感系…"></textarea>
+          <label class="form-label">Facebook</label>
+          <input type="text" id="f-link-fb" class="form-input" placeholder="https://facebook.com/...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Instagram</label>
+          <input type="text" id="f-link-ig" class="form-input" placeholder="@yourhandle 或完整連結">
+        </div>
+        <div class="form-group">
+          <label class="form-label">其他連結 / 信箱</label>
+          <textarea id="f-link-other" class="form-textarea" style="min-height:60px;" placeholder="作品集、預約系統、Email 等…"></textarea>
+        </div>
+        <div class="form-divider"></div>
+        <div class="form-group">
+          <label class="form-label">特殊需求備註</label>
+          <textarea id="f-style" class="form-textarea" placeholder="設計偏好、特殊功能需求等…"></textarea>
           <div class="form-hint">Tony 將依此作為設計參考</div>
         </div>
       </div>
@@ -531,17 +570,17 @@ var LANJUE_LOGO = 'https://raw.githubusercontent.com/TonyLin1994code/logo/c2dda0
 var LINKET_LOGO = 'https://raw.githubusercontent.com/TonyLin1994code/logo/c2dda061cdf79ebc9ae86656ffba713cb7dc067d/logo-linket.svg';
 
 var PRODUCTS = {
-  sekishoku: { name:'赤紅酵母', nameEn:'Crimson Glory', origin:'山形縣 富士酒造', type:'純米大吟釀', price:1780, img:'https://raw.githubusercontent.com/TonyLin1994code/Sekishoku/03ba7509c080afc4ee403bec176dd015a828c738/Sekishoku-bottle.png' },
-  yumebotaru: { name:'夢螢', nameEn:'Yumebotaru', origin:'福岡縣 大賀酒造', type:'純米吟釀', price:1680, img:'https://raw.githubusercontent.com/TonyLin1994code/yumebotaru/fb02f1a44aff50244f323ffc9405d17b1fac01e4/yumebotaru-bottle.png' },
-  kokage: { name:'木陰之魚', nameEn:'Kokage no Sakana', origin:'岡山縣 嘉美心酒造', type:'低酒精純米', price:1380, img:'https://raw.githubusercontent.com/TonyLin1994code/kokage-images/99cacba88ddcc73b08afc37f8a746207aac6b3c4/okage-bottle.png' }
+  sekishoku:  { name:'赤紅酵母',  nameEn:'Crimson Glory',     origin:'山形縣 富士酒造',   type:'純米大吟釀',   price:1780, img:'https://raw.githubusercontent.com/TonyLin1994code/Sekishoku/03ba7509c080afc4ee403bec176dd015a828c738/Sekishoku-bottle.png' },
+  yumebotaru: { name:'夢螢',      nameEn:'Yumebotaru',         origin:'福岡縣 大賀酒造',   type:'純米吟釀',     price:1680, img:'https://raw.githubusercontent.com/TonyLin1994code/yumebotaru/fb02f1a44aff50244f323ffc9405d17b1fac01e4/yumebotaru-bottle.png' },
+  kokage:     { name:'木陰之魚',  nameEn:'Kokage no Sakana',   origin:'岡山縣 嘉美心酒造', type:'低酒精純米',   price:1380, img:'https://raw.githubusercontent.com/TonyLin1994code/kokage-images/99cacba88ddcc73b08afc37f8a746207aac6b3c4/okage-bottle.png' }
 };
 var PLANS = {
-  experience: { name:'LINKet 體驗版', nameEn:'LINKet Light', price:6000, desc:'一頁式登場頁＋客製化頁面×1 + NFC 感應卡×1' },
-  standard: { name:'LINKet 標準版', nameEn:'LINKet Plus', price:10000, desc:'品牌微型網頁＋客製化頁面×3 + NFC 感應卡×2' }
+  experience: { name:'LINKet 體驗版', nameEn:'LINKet Light', price:6000,  desc:'一頁式登場頁＋客製化頁面×1 + NFC 感應卡×1' },
+  standard:   { name:'LINKet 標準版', nameEn:'LINKet Plus',  price:10000, desc:'品牌微型網頁＋客製化頁面×3 + NFC 感應卡×2' }
 };
 
 /* ── STATE ── */
-var cart = { sekishoku:0, yumebotaru:0, kokage:0 };
+var cart     = { sekishoku:0, yumebotaru:0, kokage:0 };
 var planCart = { experience:0, standard:0 };
 var orderData = {};
 var currentStep = 1;
@@ -552,55 +591,42 @@ document.getElementById('h-logo-linket').src = LINKET_LOGO;
 
 function setupImg(imgId, phId, src) {
   var img = document.getElementById(imgId);
-  var ph = document.getElementById(phId);
+  var ph  = document.getElementById(phId);
   img.src = src;
-  img.onload = function() { ph.style.display = 'none'; img.style.display = 'block'; };
-  img.onerror = function() { img.style.display = 'none'; ph.style.display = 'flex'; };
+  img.onload  = function() { ph.style.display = 'none'; img.style.display = 'block'; };
+  img.onerror = function() { img.style.display = 'none'; ph.style.display  = 'flex';  };
 }
-setupImg('img-sekishoku', 'ph-sekishoku', PRODUCTS.sekishoku.img);
+setupImg('img-sekishoku',  'ph-sekishoku',  PRODUCTS.sekishoku.img);
 setupImg('img-yumebotaru', 'ph-yumebotaru', PRODUCTS.yumebotaru.img);
-setupImg('img-kokage', 'ph-kokage', PRODUCTS.kokage.img);
+setupImg('img-kokage',     'ph-kokage',     PRODUCTS.kokage.img);
 
 /* ── HELPERS ── */
 function getTotals() {
   var total = 0, items = 0;
   var ids = Object.keys(cart);
-  for (var i = 0; i < ids.length; i++) {
-    total += PRODUCTS[ids[i]].price * cart[ids[i]];
-    items += cart[ids[i]];
-  }
+  for (var i = 0; i < ids.length; i++) { total += PRODUCTS[ids[i]].price * cart[ids[i]]; items += cart[ids[i]]; }
   var pids = Object.keys(planCart);
-  for (var j = 0; j < pids.length; j++) {
-    total += PLANS[pids[j]].price * planCart[pids[j]];
-    items += planCart[pids[j]];
-  }
-  return { total: total, items: items };
+  for (var j = 0; j < pids.length; j++) { total += PLANS[pids[j]].price * planCart[pids[j]]; items += planCart[pids[j]]; }
+  return { total:total, items:items };
 }
 
 function updateCartBar() {
   var t = getTotals();
   var badge = document.getElementById('cart-badge');
   badge.textContent = t.items;
-  if (t.items > 0) {
-    badge.classList.add('show');
-    document.getElementById('cart-bar').classList.add('show');
-  } else {
-    badge.classList.remove('show');
-    document.getElementById('cart-bar').classList.remove('show');
-  }
-  document.getElementById('cart-bar-count').textContent = '已選 ' + t.items + ' 項';
-  document.getElementById('cart-bar-total').textContent = t.total.toLocaleString();
+  if (t.items > 0) { badge.classList.add('show'); document.getElementById('cart-bar').classList.add('show'); }
+  else             { badge.classList.remove('show'); document.getElementById('cart-bar').classList.remove('show'); }
+  document.getElementById('cart-bar-count').textContent  = '已選 ' + t.items + ' 項';
+  document.getElementById('cart-bar-total').textContent  = t.total.toLocaleString();
 }
 
 function setStep(n) {
   currentStep = n;
-  for (var i = 1; i <= 4; i++) {
-    document.getElementById('step-' + i).style.display = i === n ? 'block' : 'none';
-  }
+  for (var i = 1; i <= 4; i++) document.getElementById('step-' + i).style.display = (i === n) ? 'block' : 'none';
   var stepEls = document.querySelectorAll('.step-item');
   for (var s = 0; s < stepEls.length; s++) {
     var num = parseInt(stepEls[s].getAttribute('data-step'));
-    stepEls[s].classList.remove('active', 'done');
+    stepEls[s].classList.remove('active','done');
     if (num === n) stepEls[s].classList.add('active');
     else if (num < n) stepEls[s].classList.add('done');
   }
@@ -614,15 +640,14 @@ function changeSakeQty(id, delta) {
   cart[id] = Math.max(0, cart[id] + delta);
   document.getElementById('qty-' + id).textContent = cart[id];
   if (cart[id] > 0) document.getElementById('card-' + id).classList.add('in-cart');
-  else document.getElementById('card-' + id).classList.remove('in-cart');
+  else              document.getElementById('card-' + id).classList.remove('in-cart');
   updateCartBar();
 }
-
 function changePlanQty(id, delta) {
   planCart[id] = Math.max(0, planCart[id] + delta);
   document.getElementById('qty-' + id).textContent = planCart[id];
   if (planCart[id] > 0) document.getElementById('plan-' + id).classList.add('in-cart');
-  else document.getElementById('plan-' + id).classList.remove('in-cart');
+  else                  document.getElementById('plan-' + id).classList.remove('in-cart');
   updateCartBar();
 }
 
@@ -630,41 +655,49 @@ function changePlanQty(id, delta) {
 document.getElementById('tab-sake').addEventListener('click', function() {
   document.getElementById('tab-sake').classList.add('active');
   document.getElementById('tab-linket').classList.remove('active');
-  document.getElementById('cat-sake').style.display = 'flex';
+  document.getElementById('cat-sake').style.display   = 'flex';
   document.getElementById('cat-linket').style.display = 'none';
 });
 document.getElementById('tab-linket').addEventListener('click', function() {
   document.getElementById('tab-linket').classList.add('active');
   document.getElementById('tab-sake').classList.remove('active');
   document.getElementById('cat-linket').style.display = 'flex';
-  document.getElementById('cat-sake').style.display = 'none';
+  document.getElementById('cat-sake').style.display   = 'none';
 });
 
 /* ── SAKE BUTTONS ── */
-document.getElementById('btn-sek-minus').addEventListener('click', function() { changeSakeQty('sekishoku', -1); });
-document.getElementById('btn-sek-plus').addEventListener('click', function() { changeSakeQty('sekishoku', 1); });
+document.getElementById('btn-sek-minus').addEventListener('click',  function() { changeSakeQty('sekishoku',  -1); });
+document.getElementById('btn-sek-plus').addEventListener('click',   function() { changeSakeQty('sekishoku',   1); });
 document.getElementById('btn-yume-minus').addEventListener('click', function() { changeSakeQty('yumebotaru', -1); });
-document.getElementById('btn-yume-plus').addEventListener('click', function() { changeSakeQty('yumebotaru', 1); });
-document.getElementById('btn-kok-minus').addEventListener('click', function() { changeSakeQty('kokage', -1); });
-document.getElementById('btn-kok-plus').addEventListener('click', function() { changeSakeQty('kokage', 1); });
+document.getElementById('btn-yume-plus').addEventListener('click',  function() { changeSakeQty('yumebotaru',  1); });
+document.getElementById('btn-kok-minus').addEventListener('click',  function() { changeSakeQty('kokage',     -1); });
+document.getElementById('btn-kok-plus').addEventListener('click',   function() { changeSakeQty('kokage',      1); });
 
 /* ── PLAN BUTTONS ── */
 document.getElementById('btn-exp-minus').addEventListener('click', function() { changePlanQty('experience', -1); });
-document.getElementById('btn-exp-plus').addEventListener('click', function() { changePlanQty('experience', 1); });
-document.getElementById('btn-std-minus').addEventListener('click', function() { changePlanQty('standard', -1); });
-document.getElementById('btn-std-plus').addEventListener('click', function() { changePlanQty('standard', 1); });
+document.getElementById('btn-exp-plus').addEventListener('click',  function() { changePlanQty('experience',  1); });
+document.getElementById('btn-std-minus').addEventListener('click', function() { changePlanQty('standard',   -1); });
+document.getElementById('btn-std-plus').addEventListener('click',  function() { changePlanQty('standard',    1); });
+
+/* ── DELIVERY TOGGLE ── */
+document.getElementById('r-pickup').addEventListener('change', function() {
+  document.getElementById('shipping-address-group').style.display = 'none';
+});
+document.getElementById('r-shipping').addEventListener('change', function() {
+  document.getElementById('shipping-address-group').style.display = 'block';
+});
 
 /* ── CART TOGGLE ── */
 document.getElementById('cart-toggle').addEventListener('click', function() {
   if (currentStep === 1 && getTotals().items > 0) goToStep2();
 });
 document.getElementById('btn-cart-proceed').addEventListener('click', goToStep2);
-document.getElementById('btn-back-to-1').addEventListener('click', function() { setStep(1); updateCartBar(); });
-document.getElementById('btn-to-step3').addEventListener('click', function() { setStep(3); showLinketSection(); });
-document.getElementById('btn-back-to-2').addEventListener('click', function() { renderCartStep(); setStep(2); });
-document.getElementById('btn-submit').addEventListener('click', handleSubmit);
-document.getElementById('btn-download').addEventListener('click', downloadOrder);
-document.getElementById('btn-reset').addEventListener('click', resetAll);
+document.getElementById('btn-back-to-1').addEventListener('click',   function() { setStep(1); updateCartBar(); });
+document.getElementById('btn-to-step3').addEventListener('click',    function() { setStep(3); showLINKetSection(); });
+document.getElementById('btn-back-to-2').addEventListener('click',   function() { renderCartStep(); setStep(2); });
+document.getElementById('btn-submit').addEventListener('click',      handleSubmit);
+document.getElementById('btn-download').addEventListener('click',    downloadOrder);
+document.getElementById('btn-reset').addEventListener('click',       resetAll);
 
 /* ── NAVIGATION ── */
 function goToStep2() {
@@ -672,8 +705,7 @@ function goToStep2() {
   renderCartStep();
   setStep(2);
 }
-
-function showLinketSection() {
+function showLINKetSection() {
   var hasPlan = false;
   var pids = Object.keys(planCart);
   for (var i = 0; i < pids.length; i++) { if (planCart[pids[i]] > 0) { hasPlan = true; break; } }
@@ -682,139 +714,94 @@ function showLinketSection() {
 
 /* ── RENDER CART ── */
 function renderCartStep() {
-  var listEl = document.getElementById('cart-items-list');
+  var listEl    = document.getElementById('cart-items-list');
   var summaryEl = document.getElementById('cart-summary');
-  var emptyEl = document.getElementById('cart-empty');
-  listEl.innerHTML = '';
-  summaryEl.innerHTML = '';
-
+  var emptyEl   = document.getElementById('cart-empty');
+  listEl.innerHTML = ''; summaryEl.innerHTML = '';
   var t = getTotals();
   if (t.items === 0) { emptyEl.style.display = 'block'; return; }
   emptyEl.style.display = 'none';
 
-  var subtotalSake = 0;
-  var sakeIds = Object.keys(cart);
-  for (var i = 0; i < sakeIds.length; i++) {
-    var sid = sakeIds[i];
+  function makeQtyCtrl(getQty, onMinus, onPlus) {
+    var wrap    = document.createElement('div'); wrap.className = 'qty-control'; wrap.style.marginTop = '.4rem';
+    var minusB  = document.createElement('button'); minusB.className = 'qty-btn'; minusB.textContent = '−';
+    var qtyNum  = document.createElement('div');    qtyNum.className  = 'qty-num'; qtyNum.textContent  = getQty();
+    var plusB   = document.createElement('button'); plusB.className  = 'qty-btn'; plusB.textContent   = '+';
+    minusB.addEventListener('click', function() { onMinus(); qtyNum.textContent = getQty(); updateCartSummary(); });
+    plusB.addEventListener('click',  function() { onPlus();  qtyNum.textContent = getQty(); updateCartSummary(); });
+    wrap.appendChild(minusB); wrap.appendChild(qtyNum); wrap.appendChild(plusB);
+    return wrap;
+  }
+
+  /* sake items */
+  var sids = Object.keys(cart);
+  for (var i = 0; i < sids.length; i++) {
+    var sid = sids[i];
     if (cart[sid] === 0) continue;
     var p = PRODUCTS[sid];
     var lineTotal = p.price * cart[sid];
-    subtotalSake += lineTotal;
 
-    var div = document.createElement('div');
-    div.className = 'cart-item';
-
-    var imgDiv = document.createElement('div');
-    imgDiv.className = 'cart-item-img';
-    var img = document.createElement('img');
-    img.src = p.img;
-    img.alt = p.name;
-    img.onerror = (function(el) { return function() { el.style.display = 'none'; el.parentElement.innerHTML = '<div class="cart-item-img-placeholder">🍶</div>'; }; })(img);
+    var div     = document.createElement('div'); div.className = 'cart-item';
+    var imgDiv  = document.createElement('div'); imgDiv.className = 'cart-item-img';
+    var img     = document.createElement('img'); img.src = p.img; img.alt = p.name;
+    img.onerror = (function(el){ return function(){ el.style.display='none'; el.parentElement.innerHTML='<div class="cart-item-img-placeholder">🍶</div>'; }; })(img);
     imgDiv.appendChild(img);
 
-    var infoDiv = document.createElement('div');
-    infoDiv.className = 'cart-item-info';
+    var infoDiv = document.createElement('div'); infoDiv.className = 'cart-item-info';
     infoDiv.innerHTML = '<div class="cart-item-name">' + p.name + '</div><div class="cart-item-sub">' + p.type + ' · ' + p.origin + '</div>';
+    infoDiv.appendChild(makeQtyCtrl(
+      function(id){ return function(){ return cart[id]; }; }(sid),
+      function(id){ return function(){ changeSakeQty(id,-1); }; }(sid),
+      function(id){ return function(){ changeSakeQty(id, 1); }; }(sid)
+    ));
 
-    var qtyDiv = document.createElement('div');
-    qtyDiv.className = 'qty-control';
-    qtyDiv.style.marginTop = '.4rem';
-    var minusBtn = document.createElement('button');
-    minusBtn.className = 'qty-btn';
-    minusBtn.textContent = '−';
-    var qtyNum = document.createElement('div');
-    qtyNum.className = 'qty-num';
-    qtyNum.textContent = cart[sid];
-    var plusBtn = document.createElement('button');
-    plusBtn.className = 'qty-btn';
-    plusBtn.textContent = '+';
-    (function(id, qn) {
-      minusBtn.addEventListener('click', function() { changeSakeQty(id, -1); qn.textContent = cart[id]; updateCartSummary(); });
-      plusBtn.addEventListener('click', function() { changeSakeQty(id, 1); qn.textContent = cart[id]; updateCartSummary(); });
-    })(sid, qtyNum);
-    qtyDiv.appendChild(minusBtn);
-    qtyDiv.appendChild(qtyNum);
-    qtyDiv.appendChild(plusBtn);
-    infoDiv.appendChild(qtyDiv);
+    var rightDiv  = document.createElement('div'); rightDiv.className = 'cart-item-right';
+    var priceEl   = document.createElement('div'); priceEl.className  = 'cart-item-price'; priceEl.textContent = 'NT$ ' + lineTotal.toLocaleString();
+    var removeBtn = document.createElement('button'); removeBtn.className = 'cart-item-remove'; removeBtn.textContent = '移除';
+    removeBtn.addEventListener('click', (function(id){ return function(){
+      cart[id] = 0;
+      document.getElementById('qty-' + id).textContent = '0';
+      document.getElementById('card-' + id).classList.remove('in-cart');
+      updateCartBar(); renderCartStep();
+    }; })(sid));
+    rightDiv.appendChild(priceEl); rightDiv.appendChild(removeBtn);
 
-    var rightDiv = document.createElement('div');
-    rightDiv.className = 'cart-item-right';
-    var priceEl = document.createElement('div');
-    priceEl.className = 'cart-item-price';
-    priceEl.textContent = 'NT$ ' + lineTotal.toLocaleString();
-    var removeBtn = document.createElement('button');
-    removeBtn.className = 'cart-item-remove';
-    removeBtn.textContent = '移除';
-    (function(id) {
-      removeBtn.addEventListener('click', function() { cart[id] = 0; document.getElementById('qty-' + id).textContent = '0'; document.getElementById('card-' + id).classList.remove('in-cart'); updateCartBar(); renderCartStep(); });
-    })(sid);
-    rightDiv.appendChild(priceEl);
-    rightDiv.appendChild(removeBtn);
-
-    div.appendChild(imgDiv);
-    div.appendChild(infoDiv);
-    div.appendChild(rightDiv);
+    div.appendChild(imgDiv); div.appendChild(infoDiv); div.appendChild(rightDiv);
     listEl.appendChild(div);
   }
 
-  var subtotalPlan = 0;
+  /* plan items */
   var pids = Object.keys(planCart);
   for (var j = 0; j < pids.length; j++) {
     var pid = pids[j];
     if (planCart[pid] === 0) continue;
     var pl = PLANS[pid];
     var plLine = pl.price * planCart[pid];
-    subtotalPlan += plLine;
 
-    var pdiv = document.createElement('div');
-    pdiv.className = 'cart-item';
-
-    var pimgDiv = document.createElement('div');
-    pimgDiv.className = 'cart-item-img';
+    var pdiv    = document.createElement('div'); pdiv.className = 'cart-item';
+    var pimgDiv = document.createElement('div'); pimgDiv.className = 'cart-item-img';
     pimgDiv.innerHTML = '<div class="cart-item-img-placeholder">💳</div>';
 
-    var pinfoDiv = document.createElement('div');
-    pinfoDiv.className = 'cart-item-info';
+    var pinfoDiv = document.createElement('div'); pinfoDiv.className = 'cart-item-info';
     pinfoDiv.innerHTML = '<div class="cart-item-name">' + pl.name + '</div><div class="cart-item-sub">' + pl.desc + '</div>';
+    pinfoDiv.appendChild(makeQtyCtrl(
+      function(id){ return function(){ return planCart[id]; }; }(pid),
+      function(id){ return function(){ changePlanQty(id,-1); }; }(pid),
+      function(id){ return function(){ changePlanQty(id, 1); }; }(pid)
+    ));
 
-    var pqtyDiv = document.createElement('div');
-    pqtyDiv.className = 'qty-control';
-    pqtyDiv.style.marginTop = '.4rem';
-    var pminusBtn = document.createElement('button');
-    pminusBtn.className = 'qty-btn';
-    pminusBtn.textContent = '−';
-    var pqtyNum = document.createElement('div');
-    pqtyNum.className = 'qty-num';
-    pqtyNum.textContent = planCart[pid];
-    var pplusBtn = document.createElement('button');
-    pplusBtn.className = 'qty-btn';
-    pplusBtn.textContent = '+';
-    (function(id, qn) {
-      pminusBtn.addEventListener('click', function() { changePlanQty(id, -1); qn.textContent = planCart[id]; updateCartSummary(); });
-      pplusBtn.addEventListener('click', function() { changePlanQty(id, 1); qn.textContent = planCart[id]; updateCartSummary(); });
-    })(pid, pqtyNum);
-    pqtyDiv.appendChild(pminusBtn);
-    pqtyDiv.appendChild(pqtyNum);
-    pqtyDiv.appendChild(pplusBtn);
-    pinfoDiv.appendChild(pqtyDiv);
+    var prightDiv  = document.createElement('div'); prightDiv.className = 'cart-item-right';
+    var ppriceEl   = document.createElement('div'); ppriceEl.className  = 'cart-item-price'; ppriceEl.textContent = 'NT$ ' + plLine.toLocaleString();
+    var premoveBtn = document.createElement('button'); premoveBtn.className = 'cart-item-remove'; premoveBtn.textContent = '移除';
+    premoveBtn.addEventListener('click', (function(id){ return function(){
+      planCart[id] = 0;
+      document.getElementById('qty-' + id).textContent = '0';
+      document.getElementById('plan-' + id).classList.remove('in-cart');
+      updateCartBar(); renderCartStep();
+    }; })(pid));
+    prightDiv.appendChild(ppriceEl); prightDiv.appendChild(premoveBtn);
 
-    var prightDiv = document.createElement('div');
-    prightDiv.className = 'cart-item-right';
-    var ppriceEl = document.createElement('div');
-    ppriceEl.className = 'cart-item-price';
-    ppriceEl.textContent = 'NT$ ' + plLine.toLocaleString();
-    var premoveBtn = document.createElement('button');
-    premoveBtn.className = 'cart-item-remove';
-    premoveBtn.textContent = '移除';
-    (function(id) {
-      premoveBtn.addEventListener('click', function() { planCart[id] = 0; document.getElementById('qty-' + id).textContent = '0'; document.getElementById('plan-' + id).classList.remove('in-cart'); updateCartBar(); renderCartStep(); });
-    })(pid);
-    prightDiv.appendChild(ppriceEl);
-    prightDiv.appendChild(premoveBtn);
-
-    pdiv.appendChild(pimgDiv);
-    pdiv.appendChild(pinfoDiv);
-    pdiv.appendChild(prightDiv);
+    pdiv.appendChild(pimgDiv); pdiv.appendChild(pinfoDiv); pdiv.appendChild(prightDiv);
     listEl.appendChild(pdiv);
   }
 
@@ -822,14 +809,14 @@ function renderCartStep() {
 
   function updateCartSummary() {
     var st = getTotals();
-    var sk = 0, pl = 0;
+    var sk = 0, pl2 = 0;
     var sks = Object.keys(cart);
-    for (var a = 0; a < sks.length; a++) sk += PRODUCTS[sks[a]].price * cart[sks[a]];
+    for (var a = 0; a < sks.length; a++) sk  += PRODUCTS[sks[a]].price * cart[sks[a]];
     var pls = Object.keys(planCart);
-    for (var b = 0; b < pls.length; b++) pl += PLANS[pls[b]].price * planCart[pls[b]];
+    for (var b = 0; b < pls.length; b++) pl2 += PLANS[pls[b]].price    * planCart[pls[b]];
     var html = '';
-    if (sk > 0) html += '<div class="cart-row"><span>清酒小計</span><span>NT$ ' + sk.toLocaleString() + '</span></div>';
-    if (pl > 0) html += '<div class="cart-row"><span>LINKet 方案</span><span>NT$ ' + pl.toLocaleString() + '</span></div>';
+    if (sk  > 0) html += '<div class="cart-row"><span>清酒小計</span><span>NT$ ' + sk.toLocaleString()  + '</span></div>';
+    if (pl2 > 0) html += '<div class="cart-row"><span>LINKet 方案</span><span>NT$ ' + pl2.toLocaleString() + '</span></div>';
     html += '<div class="cart-row total"><span>總金額</span><span><span>NT$</span>' + st.total.toLocaleString() + '</span></div>';
     summaryEl.innerHTML = html;
   }
@@ -839,19 +826,25 @@ function renderCartStep() {
 function validateForm() {
   var ok = true;
   function check(id, errId, fn) {
-    var el = document.getElementById(id);
+    var el  = document.getElementById(id);
     var err = document.getElementById(errId);
     var val = el.value.trim();
-    if (!fn(val)) { el.classList.add('error'); err.classList.add('show'); if (ok) { el.scrollIntoView({ behavior:'smooth', block:'center' }); } ok = false; }
-    else { el.classList.remove('error'); err.classList.remove('show'); }
+    if (!fn(val)) {
+      el.classList.add('error'); err.classList.add('show');
+      if (ok) { el.scrollIntoView({ behavior:'smooth', block:'center' }); }
+      ok = false;
+    } else { el.classList.remove('error'); err.classList.remove('show'); }
   }
-  check('f-name', 'e-name', function(v) { return v.length > 0; });
-  check('f-phone', 'e-phone', function(v) { return /^09\d{8}$/.test(v.replace(/[-\s]/g, '')); });
-  check('f-line', 'e-line', function(v) { return v.length > 0; });
+  check('f-name',  'e-name',  function(v){ return v.length > 0; });
+  check('f-phone', 'e-phone', function(v){ return /^09\d{8}$/.test(v.replace(/[-\s]/g,'')); });
+  check('f-line',  'e-line',  function(v){ return v.length > 0; });
+  if (document.getElementById('r-shipping').checked) {
+    check('f-address', 'e-address', function(v){ return v.length > 0; });
+  }
   var hasPlan = false;
   var pids = Object.keys(planCart);
   for (var i = 0; i < pids.length; i++) { if (planCart[pids[i]] > 0) { hasPlan = true; break; } }
-  if (hasPlan) check('f-brand', 'e-brand', function(v) { return v.length > 0; });
+  if (hasPlan) check('f-brand', 'e-brand', function(v){ return v.length > 0; });
   return ok;
 }
 
@@ -865,24 +858,24 @@ function handleSubmit() {
 
 /* ── BUILD ORDER DATA ── */
 function buildOrderData() {
-  var now = new Date();
-  var pad = function(n) { return String(n).padStart(2, '0'); };
+  var now    = new Date();
+  var pad    = function(n){ return String(n).padStart(2,'0'); };
   var orderId = 'LK-' + String(now.getFullYear()).slice(2) + pad(now.getMonth()+1) + pad(now.getDate()) + '-' + pad(now.getHours()) + pad(now.getMinutes());
   var dateStr = now.getFullYear() + '/' + (now.getMonth()+1) + '/' + now.getDate() + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes());
 
   var items = [];
-  var sids = Object.keys(cart);
+  var sids  = Object.keys(cart);
   for (var i = 0; i < sids.length; i++) {
     if (cart[sids[i]] > 0) {
       var p = PRODUCTS[sids[i]];
-      items.push({ name: p.name, qty: cart[sids[i]], price: p.price, lineTotal: p.price * cart[sids[i]] });
+      items.push({ name:p.name, qty:cart[sids[i]], price:p.price, lineTotal:p.price*cart[sids[i]] });
     }
   }
   var pids = Object.keys(planCart);
   for (var j = 0; j < pids.length; j++) {
     if (planCart[pids[j]] > 0) {
       var pl = PLANS[pids[j]];
-      items.push({ name: pl.name, qty: planCart[pids[j]], price: pl.price, lineTotal: pl.price * planCart[pids[j]] });
+      items.push({ name:pl.name, qty:planCart[pids[j]], price:pl.price, lineTotal:pl.price*planCart[pids[j]] });
     }
   }
   var total = 0;
@@ -891,25 +884,34 @@ function buildOrderData() {
   var hasPlan = false;
   for (var m = 0; m < pids.length; m++) { if (planCart[pids[m]] > 0) { hasPlan = true; break; } }
 
+  var isShipping = document.getElementById('r-shipping').checked;
   orderData = {
-    orderId: orderId, date: dateStr, items: items, total: total,
+    orderId: orderId,
+    date:    dateStr,
+    items:   items,
+    total:   total,
     customer: {
-      name: document.getElementById('f-name').value.trim(),
-      phone: document.getElementById('f-phone').value.trim(),
-      line: document.getElementById('f-line').value.trim(),
-      note: document.getElementById('f-note').value.trim()
+      name:     document.getElementById('f-name').value.trim(),
+      phone:    document.getElementById('f-phone').value.trim(),
+      line:     document.getElementById('f-line').value.trim(),
+      delivery: isShipping ? '宅配運送（運費另計）' : '現場自取',
+      address:  isShipping ? document.getElementById('f-address').value.trim() : '',
+      note:     document.getElementById('f-note').value.trim()
     },
     brand: hasPlan ? {
       brandName: document.getElementById('f-brand').value.trim(),
-      role: document.getElementById('f-role').value.trim(),
-      website: document.getElementById('f-website').value.trim(),
-      links: document.getElementById('f-links').value.trim(),
-      style: document.getElementById('f-style').value.trim()
+      role:      document.getElementById('f-role').value.trim(),
+      linkLine:  document.getElementById('f-link-line').value.trim(),
+      linkWeb:   document.getElementById('f-link-web').value.trim(),
+      linkFb:    document.getElementById('f-link-fb').value.trim(),
+      linkIg:    document.getElementById('f-link-ig').value.trim(),
+      linkOther: document.getElementById('f-link-other').value.trim(),
+      notes:     document.getElementById('f-style').value.trim()
     } : null
   };
 }
 
-/* ── RENDER CONFIRM ── */
+/* ── RENDER CONFIRM (Step 4 preview) ── */
 function renderConfirm() {
   var o = orderData;
   var itemsHtml = '';
@@ -917,14 +919,17 @@ function renderConfirm() {
     var it = o.items[i];
     itemsHtml += '<div class="confirm-item"><span>' + it.name + '<span class="confirm-item-qty"> × ' + it.qty + '</span></span><span class="confirm-item-price">NT$ ' + it.lineTotal.toLocaleString() + '</span></div>';
   }
-  var infoHtml = '<div class="confirm-info-row"><span class="confirm-info-key">姓名</span><span>' + o.customer.name + '</span></div>' +
+  var infoHtml =
+    '<div class="confirm-info-row"><span class="confirm-info-key">姓名</span><span>' + o.customer.name + '</span></div>' +
     '<div class="confirm-info-row"><span class="confirm-info-key">手機</span><span>' + o.customer.phone + '</span></div>' +
     '<div class="confirm-info-row"><span class="confirm-info-key">LINE</span><span>' + o.customer.line + '</span></div>' +
-    (o.customer.note ? '<div class="confirm-info-row"><span class="confirm-info-key">備註</span><span>' + o.customer.note + '</span></div>' : '') +
-    (o.brand ? '<div class="confirm-info-row"><span class="confirm-info-key">品牌</span><span>' + o.brand.brandName + '</span></div>' : '');
+    '<div class="confirm-info-row"><span class="confirm-info-key">取貨方式</span><span>' + o.customer.delivery + '</span></div>' +
+    (o.customer.address ? '<div class="confirm-info-row"><span class="confirm-info-key">寄件地址</span><span>' + o.customer.address + '</span></div>' : '') +
+    (o.customer.note    ? '<div class="confirm-info-row"><span class="confirm-info-key">備註</span><span>' + o.customer.note + '</span></div>' : '') +
+    (o.brand            ? '<div class="confirm-info-row"><span class="confirm-info-key">品牌</span><span>' + o.brand.brandName + '</span></div>' : '');
 
   document.getElementById('order-preview').innerHTML =
-    '<div class="confirm-header"><div class="logo-row"><img src="' + LANJUE_LOGO + '" alt="蘭爵"><div class="sep"></div><img src="' + LINKET_LOGO + '" alt="LINKet"></div><div class="confirm-order-id">' + o.orderId + '</div></div>' +
+    '<div class="confirm-header"><div class="logo-row"><img src="' + LANJUE_LOGO + '" alt="嵐爵"><div class="sep"></div><img src="' + LINKET_LOGO + '" alt="LINKet"></div><div class="confirm-order-id">' + o.orderId + '</div></div>' +
     '<div class="confirm-items">' + itemsHtml + '</div>' +
     '<div class="confirm-total-row"><span class="confirm-total-label">總金額</span><span class="confirm-total-val">NT$ ' + o.total.toLocaleString() + '</span></div>' +
     '<div class="confirm-info">' + infoHtml + '</div>';
@@ -932,31 +937,62 @@ function renderConfirm() {
   buildOrderCard();
 }
 
-/* ── BUILD ORDER CARD ── */
+/* ── BUILD ORDER CARD (off-screen, for html2canvas) ── */
 function buildOrderCard() {
   var o = orderData;
+
+  /* item rows */
   var rows = '';
   for (var i = 0; i < o.items.length; i++) {
     var it = o.items[i];
-    rows += '<div class="oc-item-row"><span>' + it.name + ' × ' + it.qty + '</span><span>NT$ ' + it.lineTotal.toLocaleString() + '</span></div>';
+    rows += '<div class="oc-item-row"><span>' + it.name + ' × ' + it.qty + '</span><span>NT$\u00a0' + it.lineTotal.toLocaleString() + '</span></div>';
   }
-  var infoRows = '<div class="oc-info-row"><span class="oc-info-key">姓名</span><span class="oc-info-val">' + o.customer.name + '</span></div>' +
+
+  /* customer rows */
+  var custRows =
+    '<div class="oc-info-row"><span class="oc-info-key">姓名</span><span class="oc-info-val">' + o.customer.name + '</span></div>' +
     '<div class="oc-info-row"><span class="oc-info-key">手機</span><span class="oc-info-val">' + o.customer.phone + '</span></div>' +
-    '<div class="oc-info-row"><span class="oc-info-key">LINE</span><span class="oc-info-val">' + o.customer.line + '</span></div>' +
-    (o.customer.note ? '<div class="oc-info-row"><span class="oc-info-key">備註</span><span class="oc-info-val">' + o.customer.note + '</span></div>' : '');
+    '<div class="oc-info-row"><span class="oc-info-key">LINE ID</span><span class="oc-info-val">' + o.customer.line + '</span></div>' +
+    '<div class="oc-info-row"><span class="oc-info-key">取貨方式</span><span class="oc-info-val">' + o.customer.delivery + '</span></div>' +
+    (o.customer.address ? '<div class="oc-info-row"><span class="oc-info-key">寄件地址</span><span class="oc-info-val">' + o.customer.address + '</span></div>' : '') +
+    (o.customer.note    ? '<div class="oc-info-row"><span class="oc-info-key">備註</span><span class="oc-info-val">'    + o.customer.note    + '</span></div>' : '');
+
+  /* brand rows */
   var brandRows = '';
   if (o.brand) {
-    brandRows = '<div class="oc-divider"></div><div class="oc-section-label">LINKet 品牌資料</div>' +
-      '<div class="oc-info-row"><span class="oc-info-key">品牌</span><span class="oc-info-val">' + o.brand.brandName + '</span></div>' +
-      (o.brand.role ? '<div class="oc-info-row"><span class="oc-info-key">職稱</span><span class="oc-info-val">' + o.brand.role + '</span></div>' : '') +
-      (o.brand.website ? '<div class="oc-info-row"><span class="oc-info-key">官網</span><span class="oc-info-val">' + o.brand.website + '</span></div>' : '') +
-      (o.brand.links ? '<div class="oc-info-row"><span class="oc-info-key">展示連結</span><span class="oc-info-val" style="white-space:pre-wrap;">' + o.brand.links + '</span></div>' : '') +
-      (o.brand.style ? '<div class="oc-info-row"><span class="oc-info-key">風格</span><span class="oc-info-val">' + o.brand.style + '</span></div>' : '');
+    brandRows =
+      '<div class="oc-divider"></div>' +
+      '<div class="oc-section-label">LINKet 品牌資料</div>' +
+      '<div class="oc-info-row"><span class="oc-info-key">品牌名稱</span><span class="oc-info-val">' + o.brand.brandName + '</span></div>' +
+      (o.brand.role     ? '<div class="oc-info-row"><span class="oc-info-key">職稱</span><span class="oc-info-val">'         + o.brand.role     + '</span></div>' : '') +
+      (o.brand.linkLine ? '<div class="oc-info-row"><span class="oc-info-key">LINE</span><span class="oc-info-val">'          + o.brand.linkLine + '</span></div>' : '') +
+      (o.brand.linkWeb  ? '<div class="oc-info-row"><span class="oc-info-key">官網</span><span class="oc-info-val">'          + o.brand.linkWeb  + '</span></div>' : '') +
+      (o.brand.linkFb   ? '<div class="oc-info-row"><span class="oc-info-key">Facebook</span><span class="oc-info-val">'      + o.brand.linkFb   + '</span></div>' : '') +
+      (o.brand.linkIg   ? '<div class="oc-info-row"><span class="oc-info-key">Instagram</span><span class="oc-info-val">'     + o.brand.linkIg   + '</span></div>' : '') +
+      (o.brand.linkOther? '<div class="oc-info-row"><span class="oc-info-key">其他連結</span><span class="oc-info-val" style="white-space:pre-wrap;">' + o.brand.linkOther + '</span></div>' : '') +
+      (o.brand.notes    ? '<div class="oc-info-row"><span class="oc-info-key">特殊需求</span><span class="oc-info-val">'      + o.brand.notes    + '</span></div>' : '');
   }
+
+  /* assemble — logo row gets generous padding so images are never clipped */
   document.getElementById('order-card').innerHTML =
-    '<div class="oc-header"><div class="oc-logo-row"><img src="' + LANJUE_LOGO + '" alt="蘭爵"><div class="oc-logo-sep"></div><img src="' + LINKET_LOGO + '" alt="LINKet"></div><div class="oc-title">活動訂單</div><div class="oc-id">' + o.orderId + ' · ' + o.date + '</div></div>' +
-    '<div class="oc-body"><div class="oc-section-label">訂購品項</div>' + rows + '<div class="oc-total"><span class="oc-total-lbl">總金額</span><span class="oc-total-val">NT$ ' + o.total.toLocaleString() + '</span></div><div class="oc-divider"></div><div class="oc-section-label">訂購人資料</div>' + infoRows + brandRows + '</div>' +
-    '<div class="oc-footer"><div class="oc-footer-note">請將此圖片傳送至 LINKet LINE 官方帳號<br>Tony 將確認訂單並提供付款資訊</div><div class="oc-footer-brand">蘭爵私選 × LINKet<br>lin.ee/UgaIhG7</div></div>';
+    '<div style="background:#0d0d0d;padding:18px 18px 0;">' +
+      '<div style="display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12);">' +
+        '<img src="' + LANJUE_LOGO + '" alt="嵐爵"  style="height:26px;max-width:110px;object-fit:contain;filter:brightness(0) invert(1);opacity:.92;flex-shrink:0;">' +
+        '<div style="width:1px;height:18px;background:rgba(255,255,255,.3);flex-shrink:0;"></div>' +
+        '<img src="' + LINKET_LOGO + '" alt="LINKet" style="height:26px;max-width:110px;object-fit:contain;filter:brightness(0) invert(1);opacity:.92;flex-shrink:0;">' +
+      '</div>' +
+      '<div style="padding:12px 0 16px;">' +
+        '<div style="font-family:\'Syne\',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;margin-bottom:.25rem;">訂單明細</div>' +
+        '<div style="font-size:.58rem;letter-spacing:.12em;color:rgba(255,255,255,.35);">' + o.orderId + '　' + o.date + '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="oc-body">' +
+      '<div class="oc-section-label">訂購品項</div>' + rows +
+      '<div class="oc-total"><span class="oc-total-lbl">總金額</span><span class="oc-total-val">NT$ ' + o.total.toLocaleString() + '</span></div>' +
+      '<div class="oc-divider"></div>' +
+      '<div class="oc-section-label">訂購人資料</div>' + custRows + brandRows +
+    '</div>' +
+    '<div class="oc-footer"><div class="oc-footer-note">請將此圖片傳送至 LINKet LINE 官方帳號<br>Tony 將確認訂單並提供付款資訊</div><div class="oc-footer-brand">嵐爵私選 × LINKet<br>lin.ee/UgaIhG7</div></div>';
 }
 
 /* ── DOWNLOAD ── */
@@ -965,20 +1001,21 @@ function downloadOrder() {
   btn.textContent = '⏳ 生成中…';
   btn.disabled = true;
   setTimeout(function() {
-    html2canvas(document.getElementById('order-card'), { scale:2, useCORS:true, allowTaint:false, backgroundColor:'#ffffff', logging:false })
-      .then(function(canvas) {
-        var a = document.createElement('a');
-        a.download = orderData.orderId + '.png';
-        a.href = canvas.toDataURL('image/png');
-        a.click();
-        btn.textContent = '✓ 已下載！請傳送至 LINE';
-        btn.style.background = '#2d6a4f';
-      })
-      .catch(function() {
-        btn.textContent = '⬇ 重新下載';
-        btn.disabled = false;
-        alert('下載失敗，請截圖儲存訂單。');
-      });
+    html2canvas(document.getElementById('order-card'), {
+      scale: 2, useCORS: true, allowTaint: false,
+      backgroundColor: '#ffffff', logging: false
+    }).then(function(canvas) {
+      var a = document.createElement('a');
+      a.download = orderData.orderId + '.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+      btn.textContent = '✓ 已下載！請傳送至 LINE';
+      btn.style.background = '#2d6a4f';
+    }).catch(function() {
+      btn.textContent = '⬇ 重新下載';
+      btn.disabled = false;
+      alert('下載失敗，請截圖儲存訂單。');
+    });
   }, 400);
 }
 
@@ -997,15 +1034,10 @@ function resetAll() {
     document.getElementById('qty-' + pids[j]).textContent = '0';
     document.getElementById('plan-' + pids[j]).classList.remove('in-cart');
   }
-  document.getElementById('f-name').value = '';
-  document.getElementById('f-phone').value = '';
-  document.getElementById('f-line').value = '';
-  document.getElementById('f-note').value = '';
-  document.getElementById('f-brand').value = '';
-  document.getElementById('f-role').value = '';
-  document.getElementById('f-website').value = '';
-  document.getElementById('f-links').value = '';
-  document.getElementById('f-style').value = '';
+  var fields = ['f-name','f-phone','f-line','f-address','f-note','f-brand','f-role','f-link-line','f-link-web','f-link-fb','f-link-ig','f-link-other','f-style'];
+  for (var k = 0; k < fields.length; k++) document.getElementById(fields[k]).value = '';
+  document.getElementById('r-pickup').checked = true;
+  document.getElementById('shipping-address-group').style.display = 'none';
   var btn = document.getElementById('btn-download');
   btn.textContent = '⬇ 下載訂單圖片';
   btn.disabled = false;

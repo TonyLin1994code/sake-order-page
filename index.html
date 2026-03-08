@@ -973,26 +973,32 @@ function buildOrderCard() {
       (o.brand.notes    ? '<div class="oc-info-row"><span class="oc-info-key">特殊需求</span><span class="oc-info-val">'      + o.brand.notes    + '</span></div>' : '');
   }
 
-  /* assemble — logo row gets generous padding so images are never clipped */
+  /* assemble — logos placed in footer to avoid top-crop issues */
   document.getElementById('order-card').innerHTML =
-    '<div style="background:#0d0d0d;padding:18px 18px 0;">' +
-      '<div style="display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12);">' +
-        '<img src="' + LANJUE_LOGO + '" alt="嵐爵"  style="height:26px;max-width:110px;object-fit:contain;opacity:.95;flex-shrink:0;">' +
-        '<div style="width:1px;height:18px;background:rgba(255,255,255,.3);flex-shrink:0;"></div>' +
-        '<img src="' + LINKET_LOGO + '" alt="LINKet" style="height:26px;max-width:110px;object-fit:contain;opacity:.95;flex-shrink:0;">' +
-      '</div>' +
-      '<div style="padding:12px 0 16px;">' +
-        '<div style="font-family:\'Syne\',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;margin-bottom:.25rem;">訂單明細</div>' +
-        '<div style="font-size:.58rem;letter-spacing:.12em;color:rgba(255,255,255,.35);">' + o.orderId + '　' + o.date + '</div>' +
-      '</div>' +
+    /* ── Header: text only, no images ── */
+    '<div style="background:#0d0d0d;padding:20px 18px 18px;">' +
+      '<div style="font-family:\'Syne\',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#fff;margin-bottom:.3rem;">訂單明細</div>' +
+      '<div style="font-size:.6rem;letter-spacing:.12em;color:rgba(255,255,255,.38);">' + o.orderId + '　' + o.date + '</div>' +
     '</div>' +
+    /* ── Body ── */
     '<div class="oc-body">' +
       '<div class="oc-section-label">訂購品項</div>' + rows +
       '<div class="oc-total"><span class="oc-total-lbl">總金額</span><span class="oc-total-val">NT$ ' + o.total.toLocaleString() + '</span></div>' +
       '<div class="oc-divider"></div>' +
       '<div class="oc-section-label">訂購人資料</div>' + custRows + brandRows +
     '</div>' +
-    '<div class="oc-footer"><div class="oc-footer-note">請將此圖片傳送至 LINKet LINE 官方帳號<br>Tony 將確認訂單並提供付款資訊</div><div class="oc-footer-brand">嵐爵私選 × LINKet<br>lin.ee/UgaIhG7</div></div>';
+    /* ── Footer: logos + note, fully contained ── */
+    '<div style="background:#0d0d0d;padding:16px 18px 20px;">' +
+      '<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">' +
+        '<img src="' + LANJUE_LOGO + '" alt="嵐爵"  style="height:28px;max-width:120px;object-fit:contain;object-position:left center;opacity:.95;flex-shrink:0;">' +
+        '<div style="width:1px;height:20px;background:rgba(255,255,255,.25);flex-shrink:0;"></div>' +
+        '<img src="' + LINKET_LOGO + '" alt="LINKet" style="height:28px;max-width:120px;object-fit:contain;object-position:left center;opacity:.95;flex-shrink:0;">' +
+      '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-end;">' +
+        '<div style="font-size:.6rem;color:rgba(255,255,255,.4);line-height:1.8;">請將此圖片傳送至 LINKet LINE 官方帳號<br>Tony 將確認訂單並提供付款資訊</div>' +
+        '<div style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:.72rem;color:rgba(255,255,255,.3);text-align:right;">嵐爵私選 × LINKet<br>lin.ee/UgaIhG7</div>' +
+      '</div>' +
+    '</div>';
 }
 
 /* ── DOWNLOAD ── */
